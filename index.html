@@ -113,6 +113,86 @@
             color: rgba(255,255,255,0.5);
         }
         
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .input-wrapper input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border: 1px solid rgba(232,193,90,0.35);
+            border-radius: 14px;
+            font-size: 16px;
+            font-family: 'DM Sans', sans-serif;
+            background: rgba(255,255,255,0.08);
+            color: #f8f9fa;
+            transition: all 0.3s;
+        }
+        
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: #E8C15A;
+            box-shadow: 0 0 20px rgba(232,193,90,0.3);
+            background: rgba(255,255,255,0.12);
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            color: rgba(232,193,90,0.7);
+            user-select: none;
+            transition: color 0.3s;
+        }
+        
+        .toggle-password:hover {
+            color: #E8C15A;
+        }
+        
+        .remember-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .remember-row label {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .remember-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #C9A227;
+            cursor: pointer;
+        }
+        
+        .forgot-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .forgot-link a {
+            color: rgba(232,193,90,0.7);
+            font-size: 12px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .forgot-link a:hover {
+            color: #E8C15A;
+            text-decoration: underline;
+        }
+        
         .btn { 
             width: 100%; 
             padding: 16px 24px; 
@@ -369,10 +449,25 @@
                 <h1>YuNur</h1>
                 <p style="color: #a5d6a7; font-size: 14px; margin-top: 5px;">Кабинет инвестора</p>
             </div>
-            <input type="text" id="invCodeInput" placeholder="Код инвестора (INV-XXXX)" maxlength="8">
-            <input type="text" id="phoneTailInput" placeholder="Последние 3 цифры телефона" maxlength="3" pattern="[0-9]{3}">
+            <div class="input-wrapper">
+                <input type="password" id="invCodeInput" placeholder="Код инвестора (INV-XXXX)" maxlength="8">
+                <span class="toggle-password" onmousedown="showPassword('invCodeInput')" onmouseup="hidePassword('invCodeInput')" onmouseleave="hidePassword('invCodeInput')">👁️</span>
+            </div>
+            <div class="input-wrapper">
+                <input type="password" id="phoneTailInput" placeholder="Последние 3 цифры телефона" maxlength="3" pattern="[0-9]{3}">
+                <span class="toggle-password" onmousedown="showPassword('phoneTailInput')" onmouseup="hidePassword('phoneTailInput')" onmouseleave="hidePassword('phoneTailInput')">👁️</span>
+            </div>
+            <div class="remember-row">
+                <label>
+                    <input type="checkbox" id="rememberCheckbox">
+                    Запомнить на этом устройстве
+                </label>
+            </div>
             <button class="btn btn-gold" onclick="login()">Войти</button>
             <p id="errorMsg" class="error-msg">Не найдено, проверьте код</p>
+            <div class="forgot-link">
+                <a href="#" onclick="forgetDevice(); return false;">Забыть код на этом устройстве</a>
+            </div>
         </div>
     </div>
     
@@ -417,9 +512,43 @@
         let currentInvestor = null;
         const DATA_URL = 'https://raw.githubusercontent.com/Faust-412/YuNur/main/data/investors.json';
         
+        // Проверка запомненных данных при загрузке страницы
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedCode = localStorage.getItem('yn_investor_code');
+            const savedTail = localStorage.getItem('yn_investor_tail');
+            
+            if (savedCode && savedTail) {
+                document.getElementById('invCodeInput').value = savedCode;
+                document.getElementById('phoneTailInput').value = savedTail;
+                document.getElementById('rememberCheckbox').checked = true;
+                // Автоматический вход
+                setTimeout(() => login(), 500);
+            }
+        });
+        
+        function showPassword(inputId) {
+            const input = document.getElementById(inputId);
+            input.type = 'text';
+        }
+        
+        function hidePassword(inputId) {
+            const input = document.getElementById(inputId);
+            input.type = 'password';
+        }
+        
+        function forgetDevice() {
+            localStorage.removeItem('yn_investor_code');
+            localStorage.removeItem('yn_investor_tail');
+            document.getElementById('invCodeInput').value = '';
+            document.getElementById('phoneTailInput').value = '';
+            document.getElementById('rememberCheckbox').checked = false;
+            alert('Код забыт на этом устройстве');
+        }
+        
         async function login() {
             const codeInput = document.getElementById('invCodeInput');
             const tailInput = document.getElementById('phoneTailInput');
+            const rememberCheckbox = document.getElementById('rememberCheckbox');
             const errorMsg = document.getElementById('errorMsg');
             
             const code = codeInput.value.trim().toUpperCase();
@@ -449,6 +578,13 @@
                 }
                 
                 currentInvestor = investor;
+                
+                // Запомнить данные если чекбокс включён
+                if (rememberCheckbox.checked) {
+                    localStorage.setItem('yn_investor_code', code);
+                    localStorage.setItem('yn_investor_tail', tail);
+                }
+                
                 showDashboard();
             } catch (e) {
                 errorMsg.style.display = 'block';
