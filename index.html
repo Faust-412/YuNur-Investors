@@ -9,12 +9,16 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'DM Sans', sans-serif; 
-            background: linear-gradient(165deg, #04150E 0%, #0A3D26 40%, #10603A 100%);
+            /* Основной цвет YuNur: #6CA560 (RGB 108,165,96) */
+            background: linear-gradient(165deg, #1E3A1A 0%, #14290F 100%);
             color: #f8f9fa; 
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
         }
+        
+        /* Переменные цветов для карточек и шапки на основе #6CA560 */
+        /* Светлый оттенок: #7DB871, тёмный оттенок: #5C9350 */
         
         /* Световые пятна */
         body::after {
@@ -36,7 +40,7 @@
             left: -10%;
             width: 60%;
             height: 60%;
-            background: radial-gradient(circle, rgba(27,122,78,0.25) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(108,165,96,0.25) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
         }
@@ -144,8 +148,7 @@
         .dashboard { display: none; }
         
         .header { 
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(180deg, #7DB871 0%, #5C9350 100%);
             padding: 25px 20px; 
             border-radius: 20px; 
             margin-bottom: 25px;
@@ -155,24 +158,35 @@
             overflow: hidden;
         }
         
-        /* Полоска флага Дагестана с мягкими переходами */
-        .dagestan-flag {
+        /* Флаг Дагестана блоком в правом верхнем углу */
+        .dagestan-flag-block {
             position: absolute;
-            bottom: 12px;
-            left: 20px;
+            top: 20px;
             right: 20px;
-            height: 4px;
-            border-radius: 2px;
-            background: linear-gradient(90deg, 
+            width: 96px;
+            height: 64px;
+            border-radius: 8px;
+            border: 1px solid rgba(232,193,90,0.6);
+            box-shadow: 0 0 12px rgba(232,193,90,0.3);
+            overflow: hidden;
+        }
+        
+        .dagestan-flag-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, 
                 #00A650 0%, 
-                #00A650 30%,
-                #0033A0 30%,
-                #0033A0 50%,
-                #D22630 50%,
-                #D22630 70%
+                #00A650 32%,
+                #0033A0 32%,
+                #0033A0 66%,
+                #D22630 66%,
+                #D22630 100%
             );
-            box-shadow: 0 0 10px rgba(255,255,255,0.3);
-            opacity: 0.9;
+            filter: blur(1px);
         }
         
         .header-top { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
@@ -208,8 +222,7 @@
         }
         
         .card { 
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(180deg, #7DB871 0%, #5C9350 100%);
             padding: 20px; 
             border-radius: 20px; 
             border: 1px solid rgba(232,193,90,0.35);
@@ -222,7 +235,7 @@
         
         .card-label { 
             font-size: 13px; 
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.9);
             margin-bottom: 8px; 
             font-weight: 500;
         }
@@ -237,12 +250,12 @@
             tabular-nums: normal;
         }
         
-        .card.card-wide { grid-column: span 2; }
+        .card.card-wide { grid-column: 1 / -1; }
+        .card.card-half { grid-column: span 1; }
         
         /* Timeline */
         .timeline-section { 
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(180deg, #7DB871 0%, #5C9350 100%);
             padding: 25px 20px; 
             border-radius: 20px;
             border: 1px solid rgba(232,193,90,0.35);
@@ -371,23 +384,19 @@
                 <span class="investor-name" id="dashName">Имя инвестора</span>
             </div>
             <span class="status-badge status-active" id="statusBadge">Активен</span>
-            <div class="dagestan-flag">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <div class="dagestan-flag-block"></div>
         </div>
         
         <div class="cards-grid">
-            <div class="card">
+            <div class="card card-wide">
                 <div class="card-label">На счёте</div>
                 <div class="card-value" id="cardOnAccount">0 ₽</div>
             </div>
-            <div class="card">
+            <div class="card card-half">
                 <div class="card-label">В обороте</div>
                 <div class="card-value" id="cardInTurnover">0 ₽</div>
             </div>
-            <div class="card">
+            <div class="card card-half">
                 <div class="card-label">Начислено дохода</div>
                 <div class="card-value" id="cardAccrued">0 ₽</div>
             </div>
