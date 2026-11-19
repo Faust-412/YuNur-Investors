@@ -500,6 +500,7 @@
         <div class="cards-grid">
             <div class="card card-wide">
                 <div class="card-label">На счёте</div>
+                renderInvestorClients(investor.deals); // ← ДОБАВИТЬ ЭТУ СТРОКУ
                 <div class="card-value" id="cardOnAccount">0 ₽</div>
             </div>
             <div class="card card-half">
@@ -517,7 +518,31 @@
         </div>
         
         <div class="timeline-section">
-            <div class="timeline-title">📜 История операций</div>
+            <div class="timeline-title">📜 История операций</div><!-- Блок клиентов инвестора -->
+<div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+    <h3 style="color: #1b4332; margin-bottom: 15px; font-size: 1.2rem;">👥 Клиенты, взявшие на ваши средства</h3>
+    
+    <input type="text" id="clientSearch" placeholder="🔍 Поиск по имени клиента или товару..." 
+           style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; font-size: 1rem; font-family: inherit;" 
+           oninput="filterInvestorClients()">
+           
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-family: 'DM Sans', sans-serif;">
+            <thead>
+                <tr style="background: #1b4332; color: white;">
+                    <th style="padding: 12px; text-align: left;">Дата</th>
+                    <th style="padding: 12px; text-align: left;">ФИО Клиента</th>
+                    <th style="padding: 12px; text-align: left;">Товар</th>
+                    <th style="padding: 12px; text-align: right;">Сумма</th>
+                    <th style="padding: 12px; text-align: center;">Статус</th>
+                </tr>
+            </thead>
+            <tbody id="investorClientsBody">
+                <!-- Заполняется через JS -->
+            </tbody>
+        </table>
+    </div>
+</div>
             <div class="timeline" id="timeline"></div>
             <button class="btn btn-logout" onclick="logout()">Выйти</button>
         </div>
@@ -742,6 +767,48 @@
             document.getElementById('loginScreen').style.display = 'flex';
             document.getElementById('dashboard').style.display = 'none';
         }
+        // Функция отрисовки таблицы клиентов (вызывай её там же, где обновляешь данные инвестора)
+function renderInvestorClients(deals) {
+    const tbody = document.getElementById('investorClientsBody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    
+    // Берем только активные сделки, где указан клиент
+    const clientDeals = (deals || []).filter(d => d.active && d.clientName);
+    
+    // Сортируем по дате (новые сверху)
+    clientDeals.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    if (clientDeals.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="padding: 20px; text-align: center; color: #777;">Пока нет клиентов, взявших товар на ваши средства</td></tr>';
+        return;
+    }
+
+    clientDeals.forEach(d => {
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid #eee';
+        tr.innerHTML = `
+            <td style="padding: 12px; color: #555;">${d.date}</td>
+            <td style="padding: 12px; font-weight: 600; color: #1b4332;">${d.clientName}</td>
+            <td style="padding: 12px; color: #333;">${d.productName}</td>
+            <td style="padding: 12px; text-align: right; font-weight: 700; color: #1b4332;">${Number(d.amount).toLocaleString('ru-RU')} ₽</td>
+            <td style="padding: 12px; text-align: center;">
+                <span style="background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">Активен</span>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// Функция живого поиска по таблице
+function filterInvestorClients() {
+    const search = document.getElementById('clientSearch').value.toLowerCase();
+    const rows = document.querySelectorAll('#investorClientsBody tr');
+    rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(search) ? '' : 'none';
+    });
+}
     </script>
 </body>
 </html>
