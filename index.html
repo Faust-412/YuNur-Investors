@@ -9,18 +9,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'DM Sans', sans-serif; 
-            /* Основной цвет YuNur: #6CA560 (RGB 108,165,96) */
             background: linear-gradient(165deg, #1E3A1A 0%, #14290F 100%);
             color: #f8f9fa; 
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
         }
-        
-        /* Переменные цветов для карточек и шапки на основе #6CA560 */
-        /* Светлый оттенок: #7DB871, тёмный оттенок: #5C9350 */
-        
-        /* Световые пятна */
         body::after {
             content: '';
             position: fixed;
@@ -32,7 +26,6 @@
             pointer-events: none;
             z-index: 0;
         }
-        
         body::before {
             content: '';
             position: fixed;
@@ -44,415 +37,144 @@
             pointer-events: none;
             z-index: 0;
         }
-        
-        /* Исламский геометрический узор */
         .pattern-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l3.5 10.5h11L36 18l3.5 10.5L30 24l-9.5 4.5L24 18l-8.5-7.5h11L30 0z' fill='%23c9a227' fill-opacity='0.05'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 0;
         }
-        
         .container { max-width: 600px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
-        
-        /* Login Screen */
-        .login-wrapper { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-        }
-        
+        .login-wrapper { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         .login-box { 
             background: rgba(255,255,255,0.06);
             backdrop-filter: blur(10px);
-            padding: 40px; 
-            border-radius: 20px; 
+            padding: 40px; border-radius: 20px;
             box-shadow: 0 16px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12);
-            width: 100%; 
-            max-width: 400px;
+            width: 100%; max-width: 400px;
             border: 1px solid rgba(232,193,90,0.35);
         }
-        
         .logo { text-align: center; margin-bottom: 30px; }
         .logo h1 { 
             color: transparent;
             background: linear-gradient(180deg, #F8E08E 0%, #D4AF37 60%, #B8860B 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            font-size: 36px; 
-            font-weight: 700;
+            background-clip: text; -webkit-background-clip: text;
+            font-size: 36px; font-weight: 700;
             text-shadow: 0 0 24px rgba(232,193,90,0.45);
         }
-        
-        .login-box input { 
-            width: 100%; 
-            padding: 16px 20px; 
-            border: 1px solid rgba(232,193,90,0.35);
-            border-radius: 14px; 
-            font-size: 16px; 
-            font-family: 'DM Sans', sans-serif; 
-            margin-bottom: 20px; 
-            background: rgba(255,255,255,0.08);
-            color: #f8f9fa;
-            transition: all 0.3s; 
-        }
-        
-        .login-box input:focus { 
-            outline: none; 
-            border-color: #E8C15A;
-            box-shadow: 0 0 20px rgba(232,193,90,0.3);
-            background: rgba(255,255,255,0.12);
-        }
-        
-        .login-box input::placeholder {
-            color: rgba(255,255,255,0.5);
-        }
-        
-        .input-wrapper {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        
+        .input-wrapper { position: relative; margin-bottom: 20px; }
         .input-wrapper input {
-            width: 100%;
-            padding: 16px 50px 16px 20px;
-            border: 1px solid rgba(232,193,90,0.35);
-            border-radius: 14px;
-            font-size: 16px;
-            font-family: 'DM Sans', sans-serif;
-            background: rgba(255,255,255,0.08);
-            color: #f8f9fa;
-            transition: all 0.3s;
+            width: 100%; padding: 16px 50px 16px 20px;
+            border: 1px solid rgba(232,193,90,0.35); border-radius: 14px;
+            font-size: 16px; font-family: 'DM Sans', sans-serif;
+            background: rgba(255,255,255,0.08); color: #f8f9fa; transition: all 0.3s;
         }
-        
         .input-wrapper input:focus {
-            outline: none;
-            border-color: #E8C15A;
+            outline: none; border-color: #E8C15A;
             box-shadow: 0 0 20px rgba(232,193,90,0.3);
             background: rgba(255,255,255,0.12);
         }
-        
         .toggle-password {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            font-size: 18px;
-            color: rgba(232,193,90,0.7);
+            position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+            cursor: pointer; font-size: 18px; color: rgba(232,193,90,0.7);
             user-select: none;
-            transition: color 0.3s;
         }
-        
-        .toggle-password:hover {
-            color: #E8C15A;
-        }
-        
-        .remember-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .remember-row label {
-            color: rgba(255,255,255,0.8);
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .remember-row input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #C9A227;
-            cursor: pointer;
-        }
-        
-        .forgot-link {
-            text-align: center;
-            margin-top: 15px;
-        }
-        
-        .forgot-link a {
-            color: rgba(232,193,90,0.7);
-            font-size: 12px;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .forgot-link a:hover {
-            color: #E8C15A;
-            text-decoration: underline;
-        }
-        
-        .btn { 
-            width: 100%; 
-            padding: 16px 24px; 
-            border: none; 
-            border-radius: 14px; 
-            font-size: 16px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            transition: all 0.3s; 
-            font-family: 'DM Sans', sans-serif; 
-        }
-        
-        .btn-gold { 
-            background: linear-gradient(135deg, #F1CE6B, #C9A227);
-            color: #1A2E22;
-            box-shadow: 0 8px 24px rgba(201,162,39,0.35);
-        }
-        
-        .btn-gold:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(201,162,39,0.5);
-        }
-        
-        .error-msg { 
-            color: #FF7A7A; 
-            text-align: center; 
-            margin-top: 15px; 
-            font-weight: 500; 
-            display: none; 
-        }
-        
-        /* Dashboard */
+        .remember-row { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .remember-row label { color: rgba(255,255,255,0.8); font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .remember-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: #C9A227; cursor: pointer; }
+        .forgot-link { text-align: center; margin-top: 15px; }
+        .forgot-link a { color: rgba(232,193,90,0.7); font-size: 12px; text-decoration: none; }
+        .forgot-link a:hover { color: #E8C15A; text-decoration: underline; }
+        .btn { width: 100%; padding: 16px 24px; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: 'DM Sans', sans-serif; }
+        .btn-gold { background: linear-gradient(135deg, #F1CE6B, #C9A227); color: #1A2E22; box-shadow: 0 8px 24px rgba(201,162,39,0.35); }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(201,162,39,0.5); }
+        .error-msg { color: #FF7A7A; text-align: center; margin-top: 15px; font-weight: 500; display: none; }
         .dashboard { display: none; }
-        
         .header { 
             background: linear-gradient(180deg, #7DB871 0%, #5C9350 100%);
-            padding: 25px 20px; 
-            border-radius: 20px; 
-            margin-bottom: 25px;
+            padding: 25px 20px; border-radius: 20px; margin-bottom: 25px;
             border: 1px solid rgba(232,193,90,0.35);
             box-shadow: 0 16px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12);
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
         }
-        
-        /* Флаг Дагестана блоком в правом верхнем углу */
         .dagestan-flag-block {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 96px;
-            height: 64px;
-            border-radius: 8px;
+            position: absolute; top: 20px; right: 20px;
+            width: 96px; height: 64px; border-radius: 8px;
             border: 1px solid rgba(232,193,90,0.6);
             box-shadow: 0 0 12px rgba(232,193,90,0.3);
             overflow: hidden;
         }
-        
         .dagestan-flag-block::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(180deg, 
-                #00A650 0%, 
-                #00A650 32%,
-                #0033A0 32%,
-                #0033A0 66%,
-                #D22630 66%,
-                #D22630 100%
-            );
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(180deg, #00A650 0%, #00A650 32%, #0033A0 32%, #0033A0 66%, #D22630 66%, #D22630 100%);
             filter: blur(1px);
         }
-        
         .header-top { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .logo-small { 
-            font-size: 26px; 
-            font-weight: 700;
-            color: transparent;
-            background: linear-gradient(180deg, #F8E08E 0%, #D4AF37 60%, #B8860B 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            text-shadow: 0 0 24px rgba(232,193,90,0.45);
-        }
+        .logo-small { font-size: 26px; font-weight: 700; color: transparent; background: linear-gradient(180deg, #F8E08E 0%, #D4AF37 60%, #B8860B 100%); background-clip: text; -webkit-background-clip: text; }
         .investor-name { font-size: 20px; font-weight: 500; color: #f8f9fa; }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border: 1px solid rgba(232,193,90,0.6);
-            color: #E8C15A;
-            background: transparent;
-        }
-        
+        .status-badge { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(232,193,90,0.6); color: #E8C15A; background: transparent; }
         .tier-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-left: 8px; }
         .tier-base { background: #fff8e1; color: #c9a227; border: 1px solid #c9a227; }
         .tier-mini { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }
-        
-        .tier-description {
-            font-size: 13px;
-            color: rgba(255,255,255,0.7);
-            margin-top: 10px;
-            font-style: italic;
-        }
-        
-        /* Cards */
-        .cards-grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; 
-            margin-bottom: 25px; 
-        }
-        
+        .tier-description { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 10px; font-style: italic; }
+        .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px; }
         .card { 
             background: linear-gradient(180deg, #7DB871 0%, #5C9350 100%);
-            padding: 20px; 
-            border-radius: 20px; 
+            padding: 20px; border-radius: 20px;
             border: 1px solid rgba(232,193,90,0.35);
             box-shadow: 0 16px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12);
-            text-align: center;
-            transition: transform 0.3s;
+            text-align: center; transition: transform 0.3s;
         }
-        
         .card:hover { transform: translateY(-3px); }
-        
-        .card-label { 
-            font-size: 13px; 
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 8px; 
-            font-weight: 500;
-        }
-        
-        .card-value { 
-            font-size: 34px; 
-            font-weight: 700; 
-            color: transparent;
-            background: linear-gradient(180deg, #F8E08E 0%, #D4AF37 60%, #B8860B 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            tabular-nums: normal;
-        }
-        
+        .card-label { font-size: 13px; color: rgba(255,255,255,0.9); margin-bottom: 8px; font-weight: 500; }
+        .card-value { font-size: 34px; font-weight: 700; color: transparent; background: linear-gradient(180deg, #F8E08E 0%, #D4AF37 60%, #B8860B 100%); background-clip: text; -webkit-background-clip: text; font-variant-numeric: tabular-nums; }
         .card.card-wide { grid-column: 1 / -1; }
-        .card.card-half { grid-column: span 1; }
-        
-        /* Timeline */
         .timeline-section { 
             background: linear-gradient(180deg, #7DB871 0%, #5C9350 100%);
-            padding: 25px 20px; 
-            border-radius: 20px;
+            padding: 25px 20px; border-radius: 20px;
             border: 1px solid rgba(232,193,90,0.35);
             box-shadow: 0 16px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12);
         }
-        
-        .timeline-title { 
-            font-size: 18px; 
-            color: #E8C15A;
-            margin-bottom: 20px; 
-            font-weight: 700;
-            text-align: center;
-        }
-        
-        .timeline { 
-            position: relative; 
-            padding-left: 30px; 
-        }
-        
+        .timeline-title { font-size: 18px; color: #E8C15A; margin-bottom: 20px; font-weight: 700; text-align: center; }
+        .timeline { position: relative; padding-left: 30px; }
         .timeline::before {
-            content: '';
-            position: absolute;
-            left: 10px;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, #F8E08E, #8A6D1F);
-            border-radius: 3px;
-            box-shadow: 0 0 10px rgba(232,193,90,0.5);
+            content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+            width: 3px; background: linear-gradient(180deg, #F8E08E, #8A6D1F);
+            border-radius: 3px; box-shadow: 0 0 10px rgba(232,193,90,0.5);
         }
-        
-        .timeline-item { 
-            position: relative; 
-            margin-bottom: 20px; 
-            padding: 15px;
-            background: rgba(255,255,255,0.04);
-            border-radius: 16px;
-            border: 1px solid rgba(232,193,90,0.2);
-        }
-        
+        .timeline-item { position: relative; margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.04); border-radius: 16px; border: 1px solid rgba(232,193,90,0.2); }
         .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -24px;
-            top: 20px;
-            width: 14px;
-            height: 14px;
-            background: linear-gradient(135deg, #F8E08E, #C9A227);
-            border-radius: 50%;
-            box-shadow: 0 0 14px rgba(232,193,90,0.8);
-            border: 2px solid #04150E;
+            content: ''; position: absolute; left: -24px; top: 20px;
+            width: 14px; height: 14px; background: linear-gradient(135deg, #F8E08E, #C9A227);
+            border-radius: 50%; box-shadow: 0 0 14px rgba(232,193,90,0.8); border: 2px solid #04150E;
         }
-        
-        .timeline-icon { 
-            font-size: 20px; 
-            margin-bottom: 8px; 
-        }
-        
-        .timeline-type { 
-            font-size: 14px; 
-            font-weight: 700; 
-            color: #f8f9fa; 
-            margin-bottom: 5px;
-        }
-        
-        .timeline-amount { 
-            font-size: 18px; 
-            font-weight: 700; 
-        }
-        
+        .timeline-icon { font-size: 20px; margin-bottom: 8px; }
+        .timeline-type { font-size: 14px; font-weight: 700; color: #f8f9fa; margin-bottom: 5px; }
+        .timeline-amount { font-size: 18px; font-weight: 700; }
         .timeline-amount.positive { color: #6EE7A0; }
         .timeline-amount.negative { color: #FF7A7A; }
-        
-        .timeline-date { 
-            font-size: 12px; 
-            color: rgba(255,255,255,0.5);
-            margin-top: 5px; 
-        }
-        
-        .timeline-name {
-            font-size: 13px;
-            color: #e0e0e0;
-            margin-bottom: 5px;
-        }
-        
-        .btn-logout {
-            margin-top: 20px;
-            background: transparent;
-            border: 1px solid rgba(232,193,90,0.5);
-            color: #E8C15A;
-        }
-        
-        .btn-logout:hover {
-            background: rgba(232,193,90,0.15);
-            border-color: #E8C15A;
-        }
-        
+        .timeline-date { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 5px; }
+        .timeline-name { font-size: 13px; color: #e0e0e0; margin-bottom: 5px; }
+        .clients-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(232,193,90,0.3); }
+        .clients-title { font-size: 16px; color: #E8C15A; margin-bottom: 15px; font-weight: 700; text-align: center; }
+        .clients-table { width: 100%; border-collapse: collapse; }
+        .clients-table th { padding: 10px 12px; text-align: left; color: #E8C15A; font-size: 13px; border-bottom: 1px solid rgba(232,193,90,0.4); }
+        .clients-table td { padding: 10px 12px; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .clients-table td:first-child { font-weight: 600; color: #F8E08E; }
+        .clients-table td:last-child { color: rgba(255,255,255,0.8); text-align: right; }
+        .clients-empty { text-align: center; color: rgba(255,255,255,0.6); padding: 15px; font-size: 14px; }
+        .btn-logout { margin-top: 20px; background: transparent; border: 1px solid rgba(232,193,90,0.5); color: #E8C15A; }
+        .btn-logout:hover { background: rgba(232,193,90,0.15); border-color: #E8C15A; }
         @media (max-width: 480px) {
             .cards-grid { grid-template-columns: 1fr; }
-            .card.card-wide { grid-column: span 1; }
             .login-box { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
     <div class="pattern-overlay"></div>
+
     <!-- Login Screen -->
     <div id="loginScreen" class="login-wrapper">
         <div class="login-box">
@@ -465,23 +187,18 @@
                 <span class="toggle-password" onmousedown="showPassword('invCodeInput')" onmouseup="hidePassword('invCodeInput')" onmouseleave="hidePassword('invCodeInput')">👁️</span>
             </div>
             <div class="input-wrapper">
-                <input type="password" id="phoneTailInput" placeholder="Последние 3 цифры телефона" maxlength="3" pattern="[0-9]{3}">
+                <input type="password" id="phoneTailInput" placeholder="Последние 3 цифры телефона" maxlength="3">
                 <span class="toggle-password" onmousedown="showPassword('phoneTailInput')" onmouseup="hidePassword('phoneTailInput')" onmouseleave="hidePassword('phoneTailInput')">👁️</span>
             </div>
             <div class="remember-row">
-                <label>
-                    <input type="checkbox" id="rememberCheckbox">
-                    Запомнить на этом устройстве
-                </label>
+                <label><input type="checkbox" id="rememberCheckbox"> Запомнить на этом устройстве</label>
             </div>
             <button class="btn btn-gold" onclick="login()">Войти</button>
             <p id="errorMsg" class="error-msg">Не найдено, проверьте код</p>
-            <div class="forgot-link">
-                <a href="#" onclick="forgetDevice(); return false;">Забыть код на этом устройстве</a>
-            </div>
+            <div class="forgot-link"><a href="#" onclick="forgetDevice(); return false;">Забыть код на этом устройстве</a></div>
         </div>
     </div>
-    
+
     <!-- Dashboard -->
     <div id="dashboard" class="dashboard container">
         <div class="header">
@@ -490,25 +207,23 @@
                 <span class="investor-name" id="dashName">Имя инвестора</span>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
-                <span class="status-badge status-active" id="statusBadge">Активен</span>
+                <span class="status-badge" id="statusBadge">Активен</span>
                 <span class="tier-badge tier-base" id="tierBadge" style="display: none;"></span>
             </div>
             <div class="tier-description" id="tierDescription"></div>
             <div class="dagestan-flag-block"></div>
         </div>
-        
+
         <div class="cards-grid">
             <div class="card card-wide">
                 <div class="card-label">На счёте</div>
-                renderInvestorClients(investor.deals);
-                
                 <div class="card-value" id="cardOnAccount">0 ₽</div>
             </div>
-            <div class="card card-half">
+            <div class="card">
                 <div class="card-label">В обороте</div>
                 <div class="card-value" id="cardInTurnover">0 ₽</div>
             </div>
-            <div class="card card-half">
+            <div class="card">
                 <div class="card-label">Начислено дохода</div>
                 <div class="card-value" id="cardAccrued">0 ₽</div>
             </div>
@@ -517,78 +232,38 @@
                 <div class="card-value" id="cardEndDate">--.--.----</div>
             </div>
         </div>
-        
+
         <div class="timeline-section">
-            <div class="timeline-title">📜 История операций</div><!-- Блок клиентов инвестора -->
-<div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-    <h3 style="color: #1b4332; margin-bottom: 15px; font-size: 1.2rem;">👥 Клиенты, взявшие на ваши средства</h3>
-    
-   <!-- Блок клиентов инвестора -->
-<div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
-    <h3 style="color: #d4af37; margin-bottom: 15px; font-size: 1.2rem;">👥 Кто взял на ваши средства</h3>
-    <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; font-family: inherit;">
-            <thead>
-                <tr style="background: #1b4332; color: white;">
-                    <th style="padding: 12px; text-align: left;">ФИО клиента</th>
-                    <th style="padding: 12px; text-align: left;">Дата</th>
-                </tr>
-            </thead>
-            <tbody id="investorClientsBody"></tbody>
-        </table>
-    </div>
-</div>
-           
-    <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-family: 'DM Sans', sans-serif;">
-            <thead>
-                <tr style="background: #1b4332; color: white;">
-                    <th style="padding: 12px; text-align: left;">Дата</th>
-                    <th style="padding: 12px; text-align: left;">ФИО Клиента</th>
-                    <th style="padding: 12px; text-align: left;">Товар</th>
-                    <th style="padding: 12px; text-align: right;">Сумма</th>
-                    <th style="padding: 12px; text-align: center;">Статус</th>
-                </tr>
-            </thead>
-            <tbody id="investorClientsBody">
-                <!-- Заполняется через JS -->
-            </tbody>
-        </table>
-    </div>
-</div>
+            <div class="timeline-title">👥 Кто взял на ваши средства</div>
+            <table class="clients-table">
+                <thead><tr><th>ФИО клиента</th><th>Дата</th></tr></thead>
+                <tbody id="investorClientsBody"></tbody>
+            </table>
+
+            <div class="timeline-title" style="margin-top: 30px;">📜 История операций</div>
             <div class="timeline" id="timeline"></div>
             <button class="btn btn-logout" onclick="logout()">Выйти</button>
         </div>
     </div>
-    
+
     <script>
         let currentInvestor = null;
         const DATA_URL = 'https://raw.githubusercontent.com/Faust-412/YuNur/main/data/investors.json';
-        
-        // Проверка запомненных данных при загрузке страницы
+
         window.addEventListener('DOMContentLoaded', function() {
             const savedCode = localStorage.getItem('yn_investor_code');
             const savedTail = localStorage.getItem('yn_investor_tail');
-            
             if (savedCode && savedTail) {
                 document.getElementById('invCodeInput').value = savedCode;
                 document.getElementById('phoneTailInput').value = savedTail;
                 document.getElementById('rememberCheckbox').checked = true;
-                // Автоматический вход
                 setTimeout(() => login(), 500);
             }
         });
-        
-        function showPassword(inputId) {
-            const input = document.getElementById(inputId);
-            input.type = 'text';
-        }
-        
-        function hidePassword(inputId) {
-            const input = document.getElementById(inputId);
-            input.type = 'password';
-        }
-        
+
+        function showPassword(inputId) { document.getElementById(inputId).type = 'text'; }
+        function hidePassword(inputId) { document.getElementById(inputId).type = 'password'; }
+
         function forgetDevice() {
             localStorage.removeItem('yn_investor_code');
             localStorage.removeItem('yn_investor_tail');
@@ -597,66 +272,45 @@
             document.getElementById('rememberCheckbox').checked = false;
             alert('Код забыт на этом устройстве');
         }
-        
+
         async function login() {
-            const codeInput = document.getElementById('invCodeInput');
-            const tailInput = document.getElementById('phoneTailInput');
+            const code = document.getElementById('invCodeInput').value.trim().toUpperCase();
+            const tail = document.getElementById('phoneTailInput').value.trim();
             const rememberCheckbox = document.getElementById('rememberCheckbox');
             const errorMsg = document.getElementById('errorMsg');
-            
-            const code = codeInput.value.trim().toUpperCase();
-            const tail = tailInput.value.trim();
-            
-            if (!code || !tail) {
-                errorMsg.style.display = 'block';
-                return;
-            }
-            
+            if (!code || !tail) { errorMsg.style.display = 'block'; return; }
             try {
                 const response = await fetch(DATA_URL + '?t=' + Date.now());
                 if (!response.ok) throw new Error('Network error');
-                
                 const investors = await response.json();
-                
-                // Поиск инвестора по коду (без учёта регистра) и phoneTail
                 const investor = investors.find(inv => {
                     const invCode = (inv.invCode || '').toUpperCase();
                     const invTail = inv.phoneTail || '000';
                     return invCode === code && invTail === tail;
                 });
-                
-                if (!investor) {
-                    errorMsg.style.display = 'block';
-                    return;
-                }
-                
+                if (!investor) { errorMsg.style.display = 'block'; return; }
                 currentInvestor = investor;
-                
-                // Запомнить данные если чекбокс включён
                 if (rememberCheckbox.checked) {
                     localStorage.setItem('yn_investor_code', code);
                     localStorage.setItem('yn_investor_tail', tail);
                 }
-                
                 showDashboard();
             } catch (e) {
                 errorMsg.style.display = 'block';
                 console.error(e);
             }
         }
-        
+
         function showDashboard() {
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
-            
             const inv = currentInvestor;
             document.getElementById('dashName').textContent = inv.name;
-            
-            // Tier badge и описание
+
             const tier = inv.tier || (function() {
                 const totalDeposit = (inv.transactions || [])
                     .filter(t => t.type === 'deposit' || t.type === 'topup')
-                    .reduce((sum, t) => sum + t.amount, 0);
+                    .reduce((sum, t) => sum + (Number(t.amount) || 0), 0);
                 return (totalDeposit >= 500000 && totalDeposit <= 999999) ? 'mini' : 'base';
             })();
             const tierBadge = document.getElementById('tierBadge');
@@ -671,107 +325,87 @@
                 tierBadge.className = 'tier-badge tier-base';
                 tierDescription.textContent = 'сделки с крупной техникой, срок 3–10 мес';
             }
-            
-            // Расчёт метрик
+
             const metrics = calculateMetrics(inv);
-            
             document.getElementById('cardOnAccount').textContent = metrics.onAccount.toLocaleString('ru-RU') + ' ₽';
             document.getElementById('cardInTurnover').textContent = metrics.inTurnover.toLocaleString('ru-RU') + ' ₽';
             document.getElementById('cardAccrued').textContent = metrics.accruedIncome.toLocaleString('ru-RU') + ' ₽';
-            
-            // Дата окончания
+
             const startDate = new Date(inv.date);
             const termMonths = parseInt(inv.term) || 24;
             const endDate = new Date(startDate);
             endDate.setMonth(endDate.getMonth() + termMonths);
             document.getElementById('cardEndDate').textContent = endDate.toLocaleDateString('ru-RU');
-            
-            // Статус
+
             const now = new Date();
             const statusBadge = document.getElementById('statusBadge');
             if (endDate > now) {
                 statusBadge.textContent = 'Активен';
-                statusBadge.className = 'status-badge status-active';
             } else {
                 statusBadge.textContent = 'Закрыт';
-                statusBadge.className = 'status-badge status-closed';
             }
-            
-            // Таймлайн
+
+            renderInvestorClients(inv.deals);
             renderTimeline(inv);
         }
-        
+
+        function renderInvestorClients(deals) {
+            const tbody = document.getElementById('investorClientsBody');
+            tbody.innerHTML = '';
+            const clientDeals = (deals || []).filter(d => d.active);
+            clientDeals.sort((a, b) => new Date(b.date) - new Date(a.date));
+            if (clientDeals.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="2" class="clients-empty">Пока нет клиентов на ваших средствах</td></tr>';
+                return;
+            }
+            clientDeals.forEach(d => {
+                const tr = document.createElement('tr');
+                const name = d.clientName || '— (старая сделка)';
+                const dateStr = new Date(d.date).toLocaleDateString('ru-RU');
+                tr.innerHTML = '<td>' + name + '</td><td>' + dateStr + '</td>';
+                tbody.appendChild(tr);
+            });
+        }
+
         function calculateMetrics(inv) {
-            let onAccount = 0;
-            let inTurnover = 0;
-            let accruedIncome = 0;
-            
+            let onAccount = 0, inTurnover = 0, accruedIncome = 0;
             if (inv.transactions) {
                 inv.transactions.forEach(t => {
-                    if (t.type === 'deposit' || t.type === 'topup') {
-                        onAccount += t.amount;
-                    } else if (t.type === 'take_for_product') {
-                        onAccount -= t.amount;
-                        inTurnover += t.amount;
-                    } else if (t.type === 'income') {
-                        onAccount += t.amount;
-                        accruedIncome += t.amount;
-                    }
+                    const amount = Number(t.amount) || 0;
+                    if (t.type === 'deposit' || t.type === 'topup') { onAccount += amount; }
+                    else if (t.type === 'take_for_product') { onAccount -= amount; inTurnover += amount; }
+                    else if (t.type === 'income') { onAccount += amount; accruedIncome += amount; }
                 });
             }
-            
             return { onAccount, inTurnover, accruedIncome };
         }
-        
+
         function renderTimeline(inv) {
             const timeline = document.getElementById('timeline');
             timeline.innerHTML = '';
-            
             if (!inv.transactions || inv.transactions.length === 0) {
                 timeline.innerHTML = '<p style="color: #a5d6a7; text-align: center;">Нет операций</p>';
                 return;
             }
-            
-            // Сортировка: новые сверху
             const sorted = [...inv.transactions].sort((a, b) => new Date(b.date) - new Date(a.date));
-            
             sorted.forEach(t => {
                 const item = document.createElement('div');
                 item.className = 'timeline-item';
-                
-                let icon = '💰';
-                let typeText = 'Взнос';
-                let amountClass = 'positive';
-                let amountPrefix = '+';
-                
-                if (t.type === 'topup') {
-                    icon = '💰';
-                    typeText = 'Пополнение';
-                } else if (t.type === 'take_for_product') {
-                    icon = '📦';
-                    typeText = 'Взято на товар';
-                    amountClass = 'negative';
-                    amountPrefix = '−';
-                } else if (t.type === 'income') {
-                    icon = '📈';
-                    typeText = 'Начислен доход';
-                }
-                
-                const dateObj = new Date(t.date);
-                const dateStr = dateObj.toLocaleDateString('ru-RU');
-                
-                item.innerHTML = `
-                    <div class="timeline-icon">${icon}</div>
-                    <div class="timeline-type">${typeText}</div>
-                    ${t.name && t.type === 'take_for_product' ? `<div class="timeline-name">${t.name}</div>` : ''}
-                    <div class="timeline-amount ${amountClass}">${amountPrefix}${t.amount.toLocaleString('ru-RU')} ₽</div>
-                    <div class="timeline-date">${dateStr}</div>
-                `;
-                
+                let icon = '💰', typeText = 'Взнос', amountClass = 'positive', amountPrefix = '+';
+                if (t.type === 'topup') { icon = '💰'; typeText = 'Пополнение'; }
+                else if (t.type === 'take_for_product') { icon = '📦'; typeText = 'Взято на товар'; amountClass = 'negative'; amountPrefix = '−'; }
+                else if (t.type === 'income') { icon = '📈'; typeText = 'Начислен доход'; }
+                const dateStr = new Date(t.date).toLocaleDateString('ru-RU');
+                item.innerHTML =
+                    '<div class="timeline-icon">' + icon + '</div>' +
+                    '<div class="timeline-type">' + typeText + '</div>' +
+                    (t.name && t.type === 'take_for_product' ? '<div class="timeline-name">' + t.name + '</div>' : '') +
+                    '<div class="timeline-amount ' + amountClass + '">' + amountPrefix + (Number(t.amount) || 0).toLocaleString('ru-RU') + ' ₽</div>' +
+                    '<div class="timeline-date">' + dateStr + '</div>';
                 timeline.appendChild(item);
             });
         }
-        
+
         function logout() {
             currentInvestor = null;
             document.getElementById('invCodeInput').value = '';
@@ -780,50 +414,6 @@
             document.getElementById('loginScreen').style.display = 'flex';
             document.getElementById('dashboard').style.display = 'none';
         }
-        // Функция отрисовки таблицы клиентов (вызывай её там же, где обновляешь данные инвестора)
-function renderInvestorClients(deals) {
-    const tbody = document.getElementById('investorClientsBody');
-    if (!tbody) return;
-    tbody.innerHTML = '';
-    
-    const clientDeals = (deals || []).filter(d => d.active);
-    clientDeals.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    if (clientDeals.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="2" style="padding: 15px; text-align: center; color: rgba(255,255,255,0.7);">Пока нет клиентов на ваших средствах</td></tr>';
-        return;
-    }
-
-    clientDeals.forEach(d => {
-        const name = d.clientName || '— (старая сделка)';
-        const tr = document.createElement('tr');
-        tr.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
-        tr.innerHTML = `
-            <td style="padding: 12px; font-weight: 600; color: #d4af37;">${name}</td>
-            <td style="padding: 12px; color: rgba(255,255,255,0.85);">${d.date}</td>
-        `;
-        tbody.appendChild(tr);
-    });
-}
-
-    clientDeals.forEach(d => {
-        const tr = document.createElement('tr');
-        tr.style.borderBottom = '1px solid #eee';
-        tr.innerHTML = `
-            <td style="padding: 12px; color: #555;">${d.date}</td>
-            <td style="padding: 12px; font-weight: 600; color: #1b4332;">${d.clientName}</td>
-            <td style="padding: 12px; color: #333;">${d.productName}</td>
-            <td style="padding: 12px; text-align: right; font-weight: 700; color: #1b4332;">${Number(d.amount).toLocaleString('ru-RU')} ₽</td>
-            <td style="padding: 12px; text-align: center;">
-                <span style="background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">Активен</span>
-            </td>
-        `;
-        tbody.appendChild(tr);
-    });
-}
-
-// Функция живого поиска по таблице
-f
     </script>
 </body>
 </html>
