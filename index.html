@@ -500,7 +500,8 @@
         <div class="cards-grid">
             <div class="card card-wide">
                 <div class="card-label">На счёте</div>
-                renderInvestorClients(investor.deals); // ← ДОБАВИТЬ ЭТУ СТРОКУ
+                renderInvestorClients(investor.deals);
+                
                 <div class="card-value" id="cardOnAccount">0 ₽</div>
             </div>
             <div class="card card-half">
@@ -522,9 +523,21 @@
 <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
     <h3 style="color: #1b4332; margin-bottom: 15px; font-size: 1.2rem;">👥 Клиенты, взявшие на ваши средства</h3>
     
-    <input type="text" id="clientSearch" placeholder="🔍 Поиск по имени клиента или товару..." 
-           style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; font-size: 1rem; font-family: inherit;" 
-           oninput="filterInvestorClients()">
+   <!-- Блок клиентов инвестора -->
+<div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+    <h3 style="color: #d4af37; margin-bottom: 15px; font-size: 1.2rem;">👥 Кто взял на ваши средства</h3>
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-family: inherit;">
+            <thead>
+                <tr style="background: #1b4332; color: white;">
+                    <th style="padding: 12px; text-align: left;">ФИО клиента</th>
+                    <th style="padding: 12px; text-align: left;">Дата</th>
+                </tr>
+            </thead>
+            <tbody id="investorClientsBody"></tbody>
+        </table>
+    </div>
+</div>
            
     <div style="overflow-x: auto;">
         <table style="width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-family: 'DM Sans', sans-serif;">
@@ -773,16 +786,25 @@ function renderInvestorClients(deals) {
     if (!tbody) return;
     tbody.innerHTML = '';
     
-    // Берем только активные сделки, где указан клиент
-    const clientDeals = (deals || []).filter(d => d.active && d.clientName);
-    
-    // Сортируем по дате (новые сверху)
+    const clientDeals = (deals || []).filter(d => d.active);
     clientDeals.sort((a, b) => new Date(b.date) - new Date(a.date));
 
     if (clientDeals.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="padding: 20px; text-align: center; color: #777;">Пока нет клиентов, взявших товар на ваши средства</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="2" style="padding: 15px; text-align: center; color: rgba(255,255,255,0.7);">Пока нет клиентов на ваших средствах</td></tr>';
         return;
     }
+
+    clientDeals.forEach(d => {
+        const name = d.clientName || '— (старая сделка)';
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+        tr.innerHTML = `
+            <td style="padding: 12px; font-weight: 600; color: #d4af37;">${name}</td>
+            <td style="padding: 12px; color: rgba(255,255,255,0.85);">${d.date}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
 
     clientDeals.forEach(d => {
         const tr = document.createElement('tr');
@@ -801,14 +823,7 @@ function renderInvestorClients(deals) {
 }
 
 // Функция живого поиска по таблице
-function filterInvestorClients() {
-    const search = document.getElementById('clientSearch').value.toLowerCase();
-    const rows = document.querySelectorAll('#investorClientsBody tr');
-    rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        row.style.display = text.includes(search) ? '' : 'none';
-    });
-}
+f
     </script>
 </body>
 </html>
