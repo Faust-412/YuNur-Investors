@@ -4,118 +4,173 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Кабинет инвестора | YuNur</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap&subset=cyrillic" rel="stylesheet">
 <style>
+:root {
+--bg1: #0A2018; --bg2: #123528; --card1: #1C4A36; --card2: #153826;
+--line: rgba(227,192,92,.35); --gold: #E3C05C; --gold-soft: #F4E3B2;
+--text: #F2EDE3; --muted: #B9C9BD; --mint: #8CE0B0; --coral: #FF9B9B; --amber: #FFD27A;
+}
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scrollbar-color: #C9A227 #204A19; scrollbar-width: thin; }
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #204A19; }
-::-webkit-scrollbar-thumb { background: linear-gradient(#E8C15A, #C9A227); border-radius: 8px; border: 2px solid #204A19; }
-::-webkit-scrollbar-thumb:hover { background: #F8E08E; }
-body { font-family: 'DM Sans', sans-serif; background: linear-gradient(165deg, #41803A 0%, #2E5C24 48%, #204A19 100%); color: #f8f9fa; min-height: 100vh; position: relative; overflow-x: hidden; }
-body::after { content: ''; position: fixed; top: -20%; right: -10%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(244,224,142,0.16) 0%, transparent 70%); pointer-events: none; z-index: 0; animation: glowDrift 16s ease-in-out infinite alternate; }
-body::before { content: ''; position: fixed; bottom: -20%; left: -10%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(150,215,130,0.30) 0%, transparent 70%); pointer-events: none; z-index: 0; }
-@keyframes glowDrift { from { transform: translate(0,0); } to { transform: translate(-6%, 8%); } }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-.pattern-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l3.5 10.5h11L36 18l3.5 10.5L30 24l-9.5 4.5L24 18l-8.5-7.5h11L30 0z' fill='%23f4e08e' fill-opacity='0.07'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
-.container { max-width: 600px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+html { scrollbar-color: var(--gold) var(--bg1); scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-track { background: var(--bg1); }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--gold-soft), var(--gold)); border-radius: 8px; border: 2px solid var(--bg1); }
+body { font-family: 'Manrope', sans-serif; background: linear-gradient(165deg, var(--bg2) 0%, var(--bg1) 60%, #071811 100%); color: var(--text); min-height: 100vh; position: relative; overflow-x: hidden; font-variant-numeric: tabular-nums; }
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox='0 0 72 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23E3C05C' stroke-opacity='0.07'%3E%3Crect x='22' y='22' width='28' height='28'/%3E%3Crect x='22' y='22' width='28' height='28' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='6'/%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+body::after { content: ''; position: fixed; top: -25%; right: -15%; width: 65%; height: 65%; background: radial-gradient(circle, rgba(227,192,92,.14) 0%, transparent 70%); pointer-events: none; z-index: 0; animation: glowDrift 18s ease-in-out infinite alternate; }
+@keyframes glowDrift { from { transform: translate(0,0); } to { transform: translate(-8%, 10%); } }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes flowMove { 0% { left: 0; opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { left: calc(100% - 10px); opacity: 0; } }
+.container { max-width: 640px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
 .login-wrapper { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-.login-box { background: rgba(255,255,255,0.09); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.16); width: 100%; max-width: 400px; border: 1px solid rgba(232,193,90,0.45); animation: rise .5s ease both; }
-.logo { text-align: center; margin-bottom: 30px; }
-.logo h1 { color: transparent; background: linear-gradient(180deg, #F8E08E 0%, #D4AF37 60%, #B8860B 100%); background-clip: text; -webkit-background-clip: text; font-size: 36px; font-weight: 700; }
-.input-wrapper { position: relative; margin-bottom: 20px; }
-.input-wrapper input { width: 100%; padding: 16px 50px 16px 20px; border: 1px solid rgba(232,193,90,0.45); border-radius: 14px; font-size: 16px; font-family: 'DM Sans', sans-serif; background: rgba(255,255,255,0.10); color: #f8f9fa; transition: all 0.3s; }
-.input-wrapper input:focus { outline: none; border-color: #E8C15A; box-shadow: 0 0 20px rgba(232,193,90,0.35); background: rgba(255,255,255,0.15); }
-.toggle-password { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px; color: rgba(232,193,90,0.8); user-select: none; }
-.remember-row { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-.remember-row label { color: rgba(255,255,255,0.85); font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-.remember-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: #C9A227; cursor: pointer; }
-.forgot-link { text-align: center; margin-top: 15px; }
-.forgot-link a { color: rgba(244,224,142,0.8); font-size: 12px; text-decoration: none; }
-.btn { width: 100%; padding: 16px 24px; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: 'DM Sans', sans-serif; }
-.btn-gold { background: linear-gradient(135deg, #F1CE6B, #C9A227); color: #1A2E22; box-shadow: 0 8px 24px rgba(201,162,39,0.4); }
-.btn-gold:hover { transform: translateY(-2px); }
-.error-msg { color: #FF9A9A; text-align: center; margin-top: 15px; font-weight: 500; display: none; }
+.login-box { background: rgba(255,255,255,.06); backdrop-filter: blur(12px); padding: 40px; border-radius: 22px; border: 1px solid var(--line); box-shadow: 0 24px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12); width: 100%; max-width: 400px; animation: rise .5s ease both; }
+.logo { text-align: center; margin-bottom: 28px; }
+.logo h1 { font-family: 'Playfair Display', serif; font-size: 38px; color: transparent; background: linear-gradient(180deg, var(--gold-soft), var(--gold) 60%, #B8860B); background-clip: text; -webkit-background-clip: text; }
+.logo p { color: var(--muted); font-size: 14px; margin-top: 6px; letter-spacing: .04em; }
+.input-wrapper { position: relative; margin-bottom: 18px; }
+.input-wrapper input { width: 100%; padding: 16px 50px 16px 18px; border: 1px solid var(--line); border-radius: 14px; font-size: 16px; font-family: 'Manrope', sans-serif; background: rgba(255,255,255,.07); color: var(--text); transition: all .3s; }
+.input-wrapper input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(227,192,92,.18); background: rgba(255,255,255,.11); }
+.input-wrapper input::placeholder { color: rgba(242,237,227,.45); }
+.toggle-password { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px; opacity: .75; user-select: none; }
+.remember-row { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.remember-row label { color: var(--muted); font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.remember-row input { width: 18px; height: 18px; accent-color: var(--gold); cursor: pointer; }
+.forgot-link { text-align: center; margin-top: 14px; }
+.forgot-link a { color: rgba(227,192,92,.8); font-size: 12px; text-decoration: none; }
+.forgot-link a:hover { color: var(--gold); text-decoration: underline; }
+.btn { width: 100%; padding: 16px 24px; border: none; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; font-family: 'Manrope', sans-serif; transition: all .25s; }
+.btn-gold { background: linear-gradient(135deg, #F1CE6B, var(--gold) 60%, #C9A227); color: #17301F; box-shadow: 0 10px 26px rgba(201,162,39,.35); }
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(201,162,39,.5); }
+.btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--gold-soft); width: auto; padding: 10px 16px; font-size: 13px; font-weight: 700; border-radius: 12px; }
+.btn-ghost:hover { background: rgba(227,192,92,.12); }
+.error-msg { color: var(--coral); text-align: center; margin-top: 14px; font-weight: 600; display: none; }
 .dashboard { display: none; }
-.header { background: linear-gradient(180deg, #8CC47F 0%, #67A25A 100%); padding: 25px 20px; border-radius: 20px; margin-bottom: 25px; border: 1px solid rgba(232,193,90,0.45); position: relative; overflow: hidden; animation: rise .5s ease both; }
-.dagestan-flag-block { position: absolute; top: 20px; right: 20px; width: 96px; height: 64px; border-radius: 8px; border: 1px solid rgba(232,193,90,0.6); overflow: hidden; }
-.dagestan-flag-block::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #00A650 0%, #00A650 32%, #0033A0 32%, #0033A0 66%, #D22630 66%, #D22630 100%); filter: blur(1px); }
-.header-top { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-.logo-small { font-size: 26px; font-weight: 700; color: transparent; background: linear-gradient(180deg, #F8E08E 0%, #D4AF37 60%, #B8860B 100%); background-clip: text; -webkit-background-clip: text; }
-.investor-name { font-size: 20px; font-weight: 500; color: #ffffff; }
-.status-badge { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(26,46,34,0.5); color: #1A2E22; background: rgba(255,255,255,0.35); }
-.tier-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-left: 8px; }
-.tier-base { background: #fff8e1; color: #c9a227; border: 1px solid #c9a227; }
-.tier-mini { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }
-.tier-description { font-size: 13px; color: rgba(255,255,255,0.9); margin-top: 10px; font-style: italic; }
-.cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px; }
-.card { background: linear-gradient(180deg, #8CC47F 0%, #67A25A 100%); padding: 20px; border-radius: 20px; border: 1px solid rgba(232,193,90,0.45); text-align: center; transition: transform 0.3s; animation: rise .5s ease both; }
-.card:nth-child(2) { animation-delay: .06s; } .card:nth-child(3) { animation-delay: .12s; } .card:nth-child(4) { animation-delay: .18s; } .card:nth-child(5) { animation-delay: .24s; }
-.card:hover { transform: translateY(-3px); }
-.card-label { font-size: 13px; color: rgba(255,255,255,0.95); margin-bottom: 8px; font-weight: 500; }
-.card-value { font-size: 30px; font-weight: 700; color: transparent; background: linear-gradient(180deg, #FFF3C4 0%, #F1CE6B 60%, #D4AF37 100%); background-clip: text; -webkit-background-clip: text; font-variant-numeric: tabular-nums; }
+.header { background: linear-gradient(135deg, var(--card1), var(--card2)); border: 1px solid var(--line); border-radius: 22px; padding: 24px 22px; margin-bottom: 18px; position: relative; overflow: hidden; animation: rise .5s ease both; }
+.header::after { content: ''; position: absolute; right: -40px; top: -40px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(227,192,92,.22), transparent 70%); }
+.header-top { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.logo-small { font-family: 'Playfair Display', serif; font-size: 24px; color: transparent; background: linear-gradient(180deg, var(--gold-soft), var(--gold)); background-clip: text; -webkit-background-clip: text; }
+.investor-name { font-size: 20px; font-weight: 800; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.status-badge, .tier-badge, .code-chip { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }
+.status-badge { background: rgba(140,224,176,.15); color: var(--mint); border: 1px solid rgba(140,224,176,.4); }
+.tier-badge.base { background: rgba(227,192,92,.15); color: var(--gold); border: 1px solid var(--line); }
+.tier-badge.mini { background: rgba(140,224,176,.12); color: var(--mint); border: 1px solid rgba(140,224,176,.35); }
+.code-chip { background: rgba(255,255,255,.08); color: var(--muted); border: 1px solid rgba(255,255,255,.15); font-family: 'Manrope', monospace; }
+.tier-description { font-size: 13px; color: var(--muted); font-style: italic; }
+.dagestan-flag-block { position: absolute; top: 18px; right: 18px; width: 72px; height: 48px; border-radius: 6px; border: 1px solid var(--line); overflow: hidden; opacity: .9; }
+.dagestan-flag-block::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #00A650 0%, #00A650 32%, #0033A0 32%, #0033A0 66%, #D22630 66%, #D22630 100%); filter: blur(.6px); }
+.cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 18px; }
+.card { background: linear-gradient(160deg, var(--card1), var(--card2)); border: 1px solid var(--line); border-radius: 18px; padding: 18px; text-align: center; transition: transform .25s, box-shadow .25s; animation: rise .5s ease both; position: relative; overflow: hidden; }
+.card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: .7; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,.35); }
+.card:nth-child(2) { animation-delay: .05s; } .card:nth-child(3) { animation-delay: .1s; } .card:nth-child(4) { animation-delay: .15s; } .card:nth-child(5) { animation-delay: .2s; } .card:nth-child(6) { animation-delay: .25s; }
+.card-label { font-size: 12px; color: var(--muted); margin-bottom: 8px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.card-value { font-size: 28px; font-weight: 800; color: var(--gold-soft); line-height: 1.15; }
 .card.card-wide { grid-column: 1 / -1; }
-.section-block { background: linear-gradient(180deg, #8CC47F 0%, #67A25A 100%); border-radius: 20px; border: 1px solid rgba(232,193,90,0.45); margin-bottom: 20px; overflow: hidden; animation: rise .6s .15s ease both; }
-.section-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
-.section-header:hover { background: rgba(255,255,255,0.08); }
-.section-title { font-size: 17px; color: #FFF3C4; font-weight: 700; }
-.section-hint { font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 4px; font-weight: 400; }
-.section-arrow { font-size: 14px; color: #FFF3C4; transition: transform 0.3s; }
+.card-value.small { font-size: 20px; }
+.section-block { background: linear-gradient(160deg, var(--card1), var(--card2)); border: 1px solid var(--line); border-radius: 20px; margin-bottom: 16px; overflow: hidden; opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+.section-block.revealed { opacity: 1; transform: none; }
+.section-header { padding: 18px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px; user-select: none; }
+.section-header:hover { background: rgba(255,255,255,.05); }
+.section-title { font-size: 16px; font-weight: 800; color: var(--gold-soft); }
+.section-hint { font-size: 12px; color: var(--muted); margin-top: 3px; font-weight: 500; }
+.section-arrow { color: var(--gold); font-size: 13px; transition: transform .3s; }
 .section-block.collapsed .section-arrow { transform: rotate(-90deg); }
-.section-body { padding: 0 20px 20px; }
-.section-block.collapsed .section-body { display: none; }
+.section-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .4s ease; }
+.section-block.collapsed .section-body { grid-template-rows: 0fr; }
+.section-inner { overflow: hidden; min-height: 0; }
+.section-pad { padding: 0 20px 20px; }
+.flow { display: flex; align-items: stretch; gap: 6px; margin: 6px 0 4px; }
+.flow-node { flex: 1; background: rgba(255,255,255,.05); border: 1px solid rgba(227,192,92,.25); border-radius: 14px; padding: 12px 8px; text-align: center; }
+.flow-ico { font-size: 22px; display: block; margin-bottom: 6px; }
+.flow-node b { display: block; font-size: 12px; color: var(--text); line-height: 1.3; }
+.flow-node i { display: block; font-size: 10px; color: var(--muted); font-style: normal; margin-top: 4px; }
+.flow-link { position: relative; width: 26px; align-self: center; height: 2px; background: linear-gradient(90deg, rgba(227,192,92,.2), var(--gold), rgba(227,192,92,.2)); }
+.flow-dot { position: absolute; top: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); animation: flowMove 5s linear infinite; }
+.flow-note { font-size: 12px; color: var(--muted); margin-top: 10px; text-align: center; font-style: italic; }
+@media (max-width: 560px) { .flow { flex-wrap: wrap; } .flow-link { display: none; } .flow-node { flex: 1 1 45%; } }
+.port-row { margin-bottom: 14px; }
+.port-head { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; margin-bottom: 6px; flex-wrap: wrap; }
+.port-name { font-weight: 700; color: var(--text); }
+.port-meta { color: var(--muted); font-size: 12px; }
+.port-track { height: 10px; border-radius: 6px; background: rgba(255,255,255,.08); overflow: hidden; }
+.port-fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--gold), #8CE0B0); transition: width .8s ease; }
+.port-fill.free { background: linear-gradient(90deg, rgba(255,255,255,.35), rgba(255,255,255,.15)); }
+.disc-badge { font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: .04em; }
+.disc-great { background: rgba(140,224,176,.16); color: var(--mint); }
+.disc-good { background: rgba(227,192,92,.16); color: var(--gold); }
+.disc-bad { background: rgba(255,155,155,.16); color: var(--coral); }
+.disc-none { background: rgba(255,255,255,.08); color: var(--muted); }
 .table-wrap { overflow-x: auto; }
 .deals-table { width: 100%; border-collapse: collapse; }
-.deals-table th { padding: 10px 8px; text-align: left; color: #FFF3C4; font-size: 12px; border-bottom: 1px solid rgba(255,243,196,0.5); }
-.deals-table td { padding: 10px 8px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+.deals-table th { padding: 10px 8px; text-align: left; color: var(--gold); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--line); }
+.deals-table td { padding: 10px 8px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,.08); }
 .deal-row { cursor: pointer; transition: background .2s; }
-.deal-row:hover { background: rgba(255,255,255,0.10); }
-.deal-row td:first-child { font-weight: 600; color: #FFF3C4; }
-.deal-arrow { color: #FFF3C4; font-size: 12px; }
-.badge-returned { color: #D9FFE3; font-weight: 700; }
-.badge-partial { color: #FFE9A8; font-weight: 600; }
-.badge-turn { color: #FFD9B0; font-weight: 600; }
-.deal-detail td { background: rgba(20,41,15,0.35); padding: 14px 12px; }
-.detail-title { font-size: 13px; color: #FFF3C4; font-weight: 700; margin-bottom: 10px; }
-.progress-track { height: 8px; border-radius: 6px; background: rgba(255,255,255,0.2); overflow: hidden; margin-bottom: 6px; }
-.progress-fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, #F1CE6B, #6EE7A0); transition: width .5s ease; }
-.progress-label { font-size: 12px; color: rgba(255,255,255,0.85); margin-bottom: 12px; }
+.deal-row:hover { background: rgba(255,255,255,.06); }
+.deal-row td:first-child { font-weight: 700; color: var(--gold-soft); }
+.deal-arrow { color: var(--gold); font-size: 11px; }
+.badge-returned { color: var(--mint); font-weight: 800; }
+.badge-partial { color: var(--amber); font-weight: 700; }
+.badge-turn { color: #FFC48A; font-weight: 700; }
+.deal-detail td { background: rgba(7,24,17,.5); padding: 14px 12px; }
+.detail-title { font-size: 13px; color: var(--gold-soft); font-weight: 800; margin-bottom: 10px; }
+.progress-track { height: 8px; border-radius: 6px; background: rgba(255,255,255,.1); overflow: hidden; margin-bottom: 6px; }
+.progress-fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--gold), var(--mint)); transition: width .6s ease; }
+.progress-label { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
 .sched-table { width: 100%; border-collapse: collapse; }
-.sched-table th { padding: 6px 8px; font-size: 11px; color: #FFF3C4; text-align: left; border-bottom: 1px solid rgba(255,243,196,0.4); }
-.sched-table td { padding: 7px 8px; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.sched-next { background: rgba(241,206,107,0.18); border-left: 3px solid #F1CE6B; }
-.next-chip { display: inline-block; background: #F1CE6B; color: #1A2E22; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 6px; text-transform: uppercase; }
-.st-paid { color: #D9FFE3; font-weight: 600; }
-.st-part { color: #FFE9A8; font-weight: 600; }
-.st-late { color: #FFB3B3; font-weight: 600; }
-.st-wait { color: rgba(255,255,255,0.8); }
-.filter-bar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
-.filter-bar select, .filter-bar input { padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(232,193,90,0.5); background: rgba(20,41,15,0.35); color: #f8f9fa; font-family: 'DM Sans', sans-serif; font-size: 14px; }
+.sched-table th { padding: 6px 8px; font-size: 10px; color: var(--gold); text-align: left; border-bottom: 1px solid var(--line); text-transform: uppercase; }
+.sched-table td { padding: 7px 8px; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,.07); }
+.sched-next { background: rgba(227,192,92,.14); border-left: 3px solid var(--gold); }
+.next-chip { display: inline-block; background: var(--gold); color: #17301F; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 8px; margin-left: 6px; text-transform: uppercase; }
+.st-paid { color: var(--mint); font-weight: 700; } .st-part { color: var(--amber); font-weight: 700; } .st-late { color: var(--coral); font-weight: 700; } .st-wait { color: var(--muted); }
+.forecast-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.f-chip { background: rgba(227,192,92,.1); border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; font-size: 12px; color: var(--gold-soft); font-weight: 700; }
+.f-chip span { display: block; color: var(--muted); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+.fc-row { display: flex; justify-content: space-between; gap: 10px; padding: 9px 4px; border-bottom: 1px solid rgba(255,255,255,.07); font-size: 13px; align-items: baseline; }
+.fc-row:last-child { border-bottom: none; }
+.fc-date { color: var(--muted); font-size: 12px; min-width: 86px; }
+.fc-who { flex: 1; color: var(--text); }
+.fc-sum { color: var(--mint); font-weight: 800; white-space: nowrap; }
+.filter-bar { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.filter-bar select, .filter-bar input { padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: rgba(7,24,17,.5); color: var(--text); font-family: 'Manrope', sans-serif; font-size: 14px; }
 .filter-bar input { flex: 1; min-width: 140px; }
-.filter-bar select:focus, .filter-bar input:focus { outline: none; border-color: #F1CE6B; }
-.timeline { position: relative; padding-left: 30px; }
-.timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #F8E08E, #8A6D1F); border-radius: 3px; }
-.timeline-item { position: relative; margin-bottom: 15px; padding: 15px; background: rgba(20,41,15,0.30); border-radius: 16px; border: 1px solid rgba(232,193,90,0.3); animation: rise .4s ease both; }
-.timeline-item::before { content: ''; position: absolute; left: -24px; top: 20px; width: 14px; height: 14px; background: linear-gradient(135deg, #F8E08E, #C9A227); border-radius: 50%; border: 2px solid #204A19; }
-.timeline-type { font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 5px; }
-.timeline-sub { font-size: 13px; color: #FFF3C4; margin-bottom: 5px; }
-.timeline-amount { font-size: 18px; font-weight: 700; }
-.timeline-amount.positive { color: #A8F5C0; }
-.timeline-amount.negative { color: #FFB3B3; }
-.timeline-date { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px; }
-.empty-note { color: rgba(255,255,255,0.75); text-align: center; padding: 15px; font-size: 14px; }
-.btn-logout { margin-top: 10px; background: transparent; border: 1px solid rgba(241,206,107,0.6); color: #FFF3C4; }
-.btn-logout:hover { background: rgba(241,206,107,0.15); }
-@media (max-width: 480px) { .cards-grid { grid-template-columns: 1fr; } .login-box { padding: 30px 20px; } .card-value { font-size: 26px; } }
-@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+.filter-bar select:focus, .filter-bar input:focus { outline: none; border-color: var(--gold); }
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before { content: ''; position: absolute; left: 9px; top: 4px; bottom: 4px; width: 2px; background: linear-gradient(180deg, var(--gold-soft), rgba(227,192,92,.15)); border-radius: 2px; }
+.timeline-item { position: relative; margin-bottom: 12px; padding: 14px; background: rgba(7,24,17,.4); border: 1px solid rgba(227,192,92,.2); border-radius: 14px; animation: rise .4s ease both; }
+.timeline-item::before { content: ''; position: absolute; left: -23px; top: 18px; width: 12px; height: 12px; background: radial-gradient(circle at 35% 35%, var(--gold-soft), var(--gold)); border-radius: 50%; border: 2px solid var(--bg1); }
+.timeline-type { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+.timeline-sub { font-size: 12px; color: var(--gold-soft); margin-bottom: 4px; }
+.timeline-amount { font-size: 17px; font-weight: 800; }
+.timeline-amount.positive { color: var(--mint); } .timeline-amount.negative { color: var(--coral); }
+.timeline-date { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.empty-note { color: var(--muted); text-align: center; padding: 14px; font-size: 13px; }
+.footer-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 30px; }
+.footer-actions .btn-ghost { flex: 1; min-width: 140px; text-align: center; }
+.sharia-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 10px; font-style: italic; }
+@media (max-width: 480px) { .cards-grid { grid-template-columns: 1fr; } .card-value { font-size: 24px; } .login-box { padding: 30px 20px; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } .section-block { opacity: 1; transform: none; } }
+@media print {
+body { background: #fff; color: #111; } body::before, body::after { display: none; }
+.login-wrapper, .filter-bar, .footer-actions, .section-arrow, .flow-dot, .toggle-password { display: none !important; }
+.section-block, .card, .header { background: #fff; border: 1px solid #bbb; color: #111; opacity: 1; transform: none; }
+.section-body { grid-template-rows: 1fr !important; }
+.card-value, .section-title, .investor-name, .logo-small { color: #111 !important; background: none !important; }
+.card-label, .section-hint, .port-meta, .timeline-date, .fc-date, .muted, .tier-description { color: #555 !important; }
+.timeline-item, .port-track, .progress-track { background: #f2f2f2; border-color: #ccc; }
+.timeline-amount.positive { color: #1b7a43; } .timeline-amount.negative { color: #c62828; }
+.deals-table th, .sched-table th { color: #333; border-color: #999; }
+.deals-table td, .sched-table td { color: #111; border-color: #ddd; }
+}
 </style>
 </head>
 <body>
-<div class="pattern-overlay"></div>
 
 <div id="loginScreen" class="login-wrapper">
 <div class="login-box">
-<div class="logo"><h1>YuNur</h1><p style="color: #E4F5DC; font-size: 14px; margin-top: 5px;">Кабинет инвестора</p></div>
+<div class="logo"><h1>YuNur</h1><p>КАБИНЕТ ИНВЕСТОРА</p></div>
 <div class="input-wrapper">
 <input type="password" id="invCodeInput" placeholder="Код инвестора (INV-XXXX)" maxlength="8">
 <span class="toggle-password" onmousedown="showPassword('invCodeInput')" onmouseup="hidePassword('invCodeInput')" onmouseleave="hidePassword('invCodeInput')">👁️</span>
@@ -133,13 +188,15 @@ body::before { content: ''; position: fixed; bottom: -20%; left: -10%; width: 60
 
 <div id="dashboard" class="dashboard container">
 <div class="header">
+<div class="dagestan-flag-block"></div>
 <div class="header-top"><span class="logo-small">YuNur</span><span class="investor-name" id="dashName">Имя инвестора</span></div>
-<div style="display:flex; align-items:center; gap:8px;">
+<div class="badges">
 <span class="status-badge" id="statusBadge">Активен</span>
-<span class="tier-badge tier-base" id="tierBadge" style="display:none;"></span>
+<span class="tier-badge base" id="tierBadge" style="display:none;"></span>
+<span class="code-chip" id="codeChip">—</span>
+<span class="code-chip" id="daysChip">—</span>
 </div>
 <div class="tier-description" id="tierDescription"></div>
-<div class="dagestan-flag-block"></div>
 </div>
 
 <div class="cards-grid">
@@ -147,22 +204,61 @@ body::before { content: ''; position: fixed; bottom: -20%; left: -10%; width: 60
 <div class="card"><div class="card-label">В обороте</div><div class="card-value" id="cardInTurnover">0 ₽</div></div>
 <div class="card"><div class="card-label">Возвращено</div><div class="card-value" id="cardReturned">0 ₽</div></div>
 <div class="card"><div class="card-label">Начислено дохода</div><div class="card-value" id="cardAccrued">0 ₽</div></div>
-<div class="card"><div class="card-label">Дата окончания</div><div class="card-value" id="cardEndDate" style="font-size:22px;">--.--.----</div></div>
+<div class="card"><div class="card-label">Доходность портфеля</div><div class="card-value" id="cardYield">0 %</div></div>
+<div class="card card-wide"><div class="card-label">Дата окончания</div><div class="card-value small" id="cardEndDate">--.--.----</div></div>
+</div>
+
+<div class="section-block" id="flowSection">
+<div class="section-header" onclick="toggleSection('flowSection')">
+<div><div class="section-title">🕌 Как работают ваши деньги</div><div class="section-hint">схема мурабаха — без процента на деньги</div></div>
+<span class="section-arrow">▼</span>
+</div>
+<div class="section-body"><div class="section-inner"><div class="section-pad">
+<div class="flow">
+<div class="flow-node"><span class="flow-ico">💰</span><b>Ваш капитал</b><i>взнос на счёт</i></div>
+<div class="flow-link"><span class="flow-dot"></span></div>
+<div class="flow-node"><span class="flow-ico">🛒</span><b>YuNur выкупает товар</b><i>для клиента</i></div>
+<div class="flow-link"><span class="flow-dot" style="animation-delay:1.6s;"></span></div>
+<div class="flow-node"><span class="flow-ico">📅</span><b>Клиент возвращает</b><i>равными платежами</i></div>
+<div class="flow-link"><span class="flow-dot" style="animation-delay:3.2s;"></span></div>
+<div class="flow-node"><span class="flow-ico">📈</span><b>Ваш доход</b><i>50% торговой наценки</i></div>
+</div>
+<div class="flow-note">Доход возникает из торговой наценки на товар, а не из процента на деньги — это мурабаха, разрешённая шариатом.</div>
+</div></div></div>
+</div>
+
+<div class="section-block" id="portfolioSection">
+<div class="section-header" onclick="toggleSection('portfolioSection')">
+<div><div class="section-title">🧩 Структура портфеля</div><div class="section-hint">доли, доходность и дисциплина каждого клиента</div></div>
+<span class="section-arrow">▼</span>
+</div>
+<div class="section-body"><div class="section-inner"><div class="section-pad" id="portfolioBody"></div></div></div>
 </div>
 
 <div class="section-block" id="dealsSection">
 <div class="section-header" onclick="toggleSection('dealsSection')">
-<div><div class="section-title">👥 Кто взял на ваши средства</div><div class="section-hint">нажми на клиента — откроется график его оплат</div></div>
+<div><div class="section-title">👥 Кто взял на ваши средства</div><div class="section-hint">нажми на строку — откроется график оплат клиента</div></div>
 <span class="section-arrow">▼</span>
 </div>
-<div class="section-body">
+<div class="section-body"><div class="section-inner"><div class="section-pad">
 <div class="table-wrap">
 <table class="deals-table">
-<thead><tr><th></th><th>Клиент</th><th>Товар</th><th>Сумма</th><th>Возвращено</th><th>Статус</th></tr></thead>
+<thead><tr><th></th><th>Клиент</th><th>Товар</th><th>Сумма</th><th>Возвращено</th><th>Дисциплина</th><th>Статус</th></tr></thead>
 <tbody id="dealsBody"></tbody>
 </table>
 </div>
+</div></div></div>
 </div>
+
+<div class="section-block" id="forecastSection">
+<div class="section-header" onclick="toggleSection('forecastSection')">
+<div><div class="section-title">🔮 Прогноз начислений</div><div class="section-hint">ближайшие поступления дохода по вашим сделкам</div></div>
+<span class="section-arrow">▼</span>
+</div>
+<div class="section-body"><div class="section-inner"><div class="section-pad">
+<div class="forecast-chips" id="forecastChips"></div>
+<div id="forecastBody"></div>
+</div></div></div>
 </div>
 
 <div class="section-block" id="timelineSection">
@@ -170,7 +266,7 @@ body::before { content: ''; position: fixed; bottom: -20%; left: -10%; width: 60
 <div><div class="section-title">📜 История операций</div><div class="section-hint">каждый платёж — отдельной строкой</div></div>
 <span class="section-arrow">▼</span>
 </div>
-<div class="section-body">
+<div class="section-body"><div class="section-inner"><div class="section-pad">
 <div class="filter-bar">
 <select id="typeFilter" onchange="renderTimeline()">
 <option value="all">Все операции</option>
@@ -183,10 +279,15 @@ body::before { content: ''; position: fixed; bottom: -20%; left: -10%; width: 60
 <input type="text" id="searchFilter" placeholder="🔍 Поиск по имени или товару..." oninput="renderTimeline()">
 </div>
 <div class="timeline" id="timeline"></div>
-</div>
+</div></div></div>
 </div>
 
-<button class="btn btn-logout" onclick="logout()">Выйти</button>
+<div class="footer-actions">
+<button class="btn-ghost" onclick="downloadStatement()">⬇ Выписка CSV</button>
+<button class="btn-ghost" onclick="window.print()">🖨 Печать выписки</button>
+<button class="btn-ghost" onclick="logout()">Выйти</button>
+</div>
+<div class="sharia-note">YuNur · исламская рассрочка без риба · данные обновляются автоматически</div>
 </div>
 
 <script>
@@ -195,6 +296,7 @@ let allClients = [];
 let currentAllocation = null;
 const DATA_URL = 'https://raw.githubusercontent.com/Faust-412/YuNur/main/data/investors.json';
 const CLIENTS_URL = 'https://raw.githubusercontent.com/Faust-412/YuNur/main/data/clients.json';
+const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 window.addEventListener('DOMContentLoaded', function() {
 const savedCode = localStorage.getItem('yn_investor_code');
@@ -205,6 +307,7 @@ document.getElementById('phoneTailInput').value = savedTail;
 document.getElementById('rememberCheckbox').checked = true;
 setTimeout(function(){ login(); }, 500);
 }
+initReveal();
 });
 
 function showPassword(id) { document.getElementById(id).type = 'text'; }
@@ -221,6 +324,27 @@ function toggleSection(id) { document.getElementById(id).classList.toggle('colla
 function fmt(n) { return (Math.round(n) || 0).toLocaleString('ru-RU') + ' ₽'; }
 function fmtDate(iso) { return new Date(iso).toLocaleDateString('ru-RU'); }
 
+function initReveal() {
+const blocks = document.querySelectorAll('.section-block');
+if (!('IntersectionObserver' in window)) { blocks.forEach(function(b){ b.classList.add('revealed'); }); return; }
+const io = new IntersectionObserver(function(entries) {
+entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); } });
+}, { threshold: 0.08 });
+blocks.forEach(function(b){ io.observe(b); });
+}
+
+function countUp(el, value, formatter) {
+if (reduced) { el.textContent = formatter(value); return; }
+const start = performance.now(), dur = 800;
+function step(t) {
+const p = Math.min(1, (t - start) / dur);
+const eased = 1 - Math.pow(1 - p, 3);
+el.textContent = formatter(value * eased);
+if (p < 1) requestAnimationFrame(step);
+}
+requestAnimationFrame(step);
+}
+
 async function login() {
 const code = document.getElementById('invCodeInput').value.trim().toUpperCase();
 const tail = document.getElementById('phoneTailInput').value.trim();
@@ -228,17 +352,12 @@ const rememberCheckbox = document.getElementById('rememberCheckbox');
 const errorMsg = document.getElementById('errorMsg');
 if (!code || !tail) { errorMsg.style.display = 'block'; return; }
 try {
-const responses = await Promise.all([
-fetch(DATA_URL + '?t=' + Date.now()),
-fetch(CLIENTS_URL + '?t=' + Date.now())
-]);
-if (!responses[0].ok) throw new Error('investors load fail');
+const responses = await Promise.all([fetch(DATA_URL + '?t=' + Date.now()), fetch(CLIENTS_URL + '?t=' + Date.now())]);
+if (!responses[0].ok) throw new Error('load fail');
 const investors = await responses[0].json();
 allClients = responses[1].ok ? await responses[1].json() : [];
 const investor = investors.find(function(inv) {
-const invCode = (inv.invCode || '').toUpperCase();
-const invTail = inv.phoneTail || '000';
-return invCode === code && invTail === tail;
+return (inv.invCode || '').toUpperCase() === code && (inv.phoneTail || '000') === tail;
 });
 if (!investor) { errorMsg.style.display = 'block'; return; }
 currentInvestor = investor;
@@ -247,44 +366,33 @@ localStorage.setItem('yn_investor_code', code);
 localStorage.setItem('yn_investor_tail', tail);
 }
 showDashboard();
-} catch (e) {
-errorMsg.style.display = 'block';
-console.error(e);
-}
+} catch (e) { errorMsg.style.display = 'block'; console.error(e); }
 }
 
-/* Распределяем оплаты клиента по сделкам инвестора: каждая оплата — отдельная часть */
 function allocatePayments(inv) {
-const rows = [];
-let totalReturned = 0;
+const rows = []; let totalReturned = 0;
 const byClient = {};
-(inv.deals || []).forEach(function(d) {
-if (d.clientHash) { (byClient[d.clientHash] = byClient[d.clientHash] || []).push(d); }
-});
+(inv.deals || []).forEach(function(d) { if (d.clientHash) { (byClient[d.clientHash] = byClient[d.clientHash] || []).push(d); } });
 Object.keys(byClient).forEach(function(hash) {
 const client = allClients.find(function(c) { return c.hash === hash; });
 const pool = (client && client.schedule ? client.schedule : []).map(function(p, i) {
 return { date: p.date, idx: i, left: Number(p.paidSum) || 0 };
 }).filter(function(p) { return p.left > 0; });
-const deals = byClient[hash].slice().sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
-deals.forEach(function(deal) {
+byClient[hash].slice().sort(function(a, b) { return new Date(a.date) - new Date(b.date); }).forEach(function(deal) {
 let need = Number(deal.amount) || 0;
 const parts = [];
 for (let i = 0; i < pool.length && need > 0; i++) {
-const inst = pool[i];
-if (inst.left <= 0) continue;
-const take = Math.min(inst.left, need);
-inst.left -= take; need -= take;
-parts.push({ date: inst.date, amount: take, idx: inst.idx });
+if (pool[i].left <= 0) continue;
+const take = Math.min(pool[i].left, need);
+pool[i].left -= take; need -= take;
+parts.push({ date: pool[i].date, amount: take, idx: pool[i].idx });
 }
 const returned = (Number(deal.amount) || 0) - need;
 totalReturned += returned;
 rows.push({ deal: deal, client: client, returned: returned, payments: parts });
 });
 });
-(inv.deals || []).forEach(function(d) {
-if (!d.clientHash) rows.push({ deal: d, client: null, returned: 0, payments: [] });
-});
+(inv.deals || []).forEach(function(d) { if (!d.clientHash) rows.push({ deal: d, client: null, returned: 0, payments: [] }); });
 return { rows: rows, totalReturned: totalReturned };
 }
 
@@ -301,34 +409,80 @@ const inTurnover = Math.max(0, taken - returned);
 return { onAccount: deposits - inTurnover, inTurnover: inTurnover, returned: returned, accrued: accrued };
 }
 
+function clientDiscipline(client) {
+if (!client || !client.schedule) return { paid: 0, onTime: 0, pct: null };
+let paid = 0, onTime = 0;
+client.schedule.forEach(function(p) {
+if ((Number(p.paidSum) || 0) > 0) { paid++; if (p.bonusGiven) onTime++; }
+});
+return { paid: paid, onTime: onTime, pct: paid > 0 ? Math.round(onTime / paid * 100) : null };
+}
+function discBadge(d) {
+if (d.pct === null) return '<span class="disc-badge disc-none">нет оплат</span>';
+if (d.pct >= 90) return '<span class="disc-badge disc-great">' + d.pct + '% вовремя</span>';
+if (d.pct >= 70) return '<span class="disc-badge disc-good">' + d.pct + '% вовремя</span>';
+return '<span class="disc-badge disc-bad">' + d.pct + '% вовремя</span>';
+}
+
+function portfolioYield(inv) {
+const active = (inv.deals || []).filter(function(d) { return d.active && (Number(d.amount) || 0) > 0; });
+if (active.length === 0) return 0;
+const sumAmount = active.reduce(function(s, d) { return s + (Number(d.amount) || 0); }, 0);
+const sumYear = active.reduce(function(s, d) { return s + (Number(d.monthlyIncome) || 0) * 12; }, 0);
+return sumAmount > 0 ? (sumYear / sumAmount * 100) : 0;
+}
+
 function showDashboard() {
 document.getElementById('loginScreen').style.display = 'none';
 document.getElementById('dashboard').style.display = 'block';
 const inv = currentInvestor;
 document.getElementById('dashName').textContent = inv.name;
+document.getElementById('codeChip').textContent = inv.invCode || '---';
+const days = Math.max(0, Math.floor((Date.now() - new Date(inv.date)) / 86400000));
+document.getElementById('daysChip').textContent = days + ' дн. с нами';
 const tier = inv.tier || 'base';
 const tierBadge = document.getElementById('tierBadge');
 tierBadge.style.display = 'inline-block';
-if (tier === 'mini') {
-tierBadge.textContent = 'Мини'; tierBadge.className = 'tier-badge tier-mini';
-document.getElementById('tierDescription').textContent = 'ваши деньги работают в сделках с небольшой техникой, срок до 4 мес';
-} else {
-tierBadge.textContent = 'База'; tierBadge.className = 'tier-badge tier-base';
-document.getElementById('tierDescription').textContent = 'сделки с крупной техникой, срок 3–10 мес';
-}
+if (tier === 'mini') { tierBadge.textContent = 'Мини'; tierBadge.className = 'tier-badge mini'; document.getElementById('tierDescription').textContent = 'сделки с небольшой техникой, срок до 4 мес'; }
+else { tierBadge.textContent = 'База'; tierBadge.className = 'tier-badge base'; document.getElementById('tierDescription').textContent = 'сделки с крупной техникой, срок 3–10 мес'; }
 currentAllocation = allocatePayments(inv);
 const m = computeMetrics(inv, currentAllocation);
-document.getElementById('cardOnAccount').textContent = fmt(m.onAccount);
-document.getElementById('cardInTurnover').textContent = fmt(m.inTurnover);
-document.getElementById('cardReturned').textContent = fmt(m.returned);
-document.getElementById('cardAccrued').textContent = fmt(m.accrued);
+countUp(document.getElementById('cardOnAccount'), m.onAccount, fmt);
+countUp(document.getElementById('cardInTurnover'), m.inTurnover, fmt);
+countUp(document.getElementById('cardReturned'), m.returned, fmt);
+countUp(document.getElementById('cardAccrued'), m.accrued, fmt);
+countUp(document.getElementById('cardYield'), portfolioYield(inv), function(v) { return v.toFixed(1).replace('.', ',') + ' % годовых'; });
 const startDate = new Date(inv.date);
-const endDate = new Date(startDate);
-endDate.setMonth(endDate.getMonth() + (parseInt(inv.term) || 24));
+const endDate = new Date(startDate); endDate.setMonth(endDate.getMonth() + (parseInt(inv.term) || 24));
 document.getElementById('cardEndDate').textContent = endDate.toLocaleDateString('ru-RU');
 document.getElementById('statusBadge').textContent = endDate > new Date() ? 'Активен' : 'Закрыт';
+renderPortfolio();
 renderDeals();
+renderForecast();
 renderTimeline();
+}
+
+function renderPortfolio() {
+const box = document.getElementById('portfolioBody');
+const inv = currentInvestor;
+const m = computeMetrics(inv, currentAllocation);
+const rowByDeal = new Map(currentAllocation.rows.map(function(r) { return [r.deal, r]; }));
+const items = [];
+(inv.deals || []).forEach(function(d) {
+const row = rowByDeal.get(d) || { client: null, returned: 0 };
+const net = Math.max(0, (Number(d.amount) || 0) - row.returned);
+if (net > 0) items.push({ label: (d.clientName || (row.client ? row.client.name : 'клиент')) + ' — ' + (d.productName || 'товар'), net: net, yieldPct: (Number(d.amount) || 0) > 0 ? (Number(d.monthlyIncome) || 0) * 12 / d.amount * 100 : 0, disc: clientDiscipline(row.client), free: false });
+});
+if (m.onAccount > 0) items.push({ label: 'Свободные средства на счёте', net: m.onAccount, yieldPct: 0, disc: null, free: true });
+if (items.length === 0) { box.innerHTML = '<div class="empty-note">Портфель пока пуст</div>'; return; }
+const total = items.reduce(function(s, i) { return s + i.net; }, 0);
+box.innerHTML = items.map(function(i) {
+const share = total > 0 ? Math.round(i.net / total * 100) : 0;
+return '<div class="port-row">' +
+'<div class="port-head"><span class="port-name">' + i.label + '</span>' +
+'<span class="port-meta">' + fmt(i.net) + ' · ' + share + '%' + (i.free ? '' : ' · ~' + i.yieldPct.toFixed(1).replace('.', ',') + '% год. ' + discBadge(i.disc)) + '</span></div>' +
+'<div class="port-track"><div class="port-fill' + (i.free ? ' free' : '') + '" style="width:' + share + '%"></div></div></div>';
+}).join('');
 }
 
 function toggleDeal(id) {
@@ -345,11 +499,8 @@ tbody.innerHTML = '';
 const inv = currentInvestor;
 const rowByDeal = new Map(currentAllocation.rows.map(function(r) { return [r.deal, r]; }));
 const deals = (inv.deals || []).slice().sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
-if (deals.length === 0) {
-tbody.innerHTML = '<tr><td colspan="6" class="empty-note">Пока нет клиентов на ваших средствах</td></tr>';
-return;
-}
-const today = new Date(); today.setHours(0,0,0,0);
+if (deals.length === 0) { tbody.innerHTML = '<tr><td colspan="7" class="empty-note">Пока нет клиентов на ваших средствах</td></tr>'; return; }
+const today = new Date(); today.setHours(0, 0, 0, 0);
 deals.forEach(function(d, di) {
 const row = rowByDeal.get(d) || { client: null, returned: 0, payments: [] };
 const id = d.id || ('d' + di);
@@ -362,13 +513,10 @@ else { statusHtml = 'В обороте'; statusClass = 'badge-turn'; }
 const tr = document.createElement('tr');
 tr.className = 'deal-row';
 tr.onclick = function() { toggleDeal(id); };
-tr.innerHTML = '<td><span class="deal-arrow" id="arrow-' + id + '">▾</span></td><td>' + name + '</td><td>' + (d.productName || '—') + '</td><td>' + fmt(amount) + '</td><td>' + fmt(row.returned) + '</td><td class="' + statusClass + '">' + statusHtml + '</td>';
+tr.innerHTML = '<td><span class="deal-arrow" id="arrow-' + id + '">▾</span></td><td>' + name + '</td><td>' + (d.productName || '—') + '</td><td>' + fmt(amount) + '</td><td>' + fmt(row.returned) + '</td><td>' + discBadge(clientDiscipline(row.client)) + '</td><td class="' + statusClass + '">' + statusHtml + '</td>';
 tbody.appendChild(tr);
-
 const detail = document.createElement('tr');
-detail.className = 'deal-detail';
-detail.id = 'detail-' + id;
-detail.style.display = 'none';
+detail.className = 'deal-detail'; detail.id = 'detail-' + id; detail.style.display = 'none';
 let inner = '<div class="detail-title">📅 График оплат — ' + name + '</div>';
 const pct = amount > 0 ? Math.min(100, Math.round(row.returned / amount * 100)) : 0;
 inner += '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%"></div></div>';
@@ -376,29 +524,58 @@ inner += '<div class="progress-label">Возвращено ' + fmt(row.returned)
 if (row.client && row.client.schedule && row.client.schedule.length) {
 let nextIdx = -1;
 for (let i = 0; i < row.client.schedule.length; i++) {
-const p = row.client.schedule[i];
-if ((Number(p.paidSum) || 0) < (Number(p.sum) || 0)) { nextIdx = i; break; }
+if ((Number(row.client.schedule[i].paidSum) || 0) < (Number(row.client.schedule[i].sum) || 0)) { nextIdx = i; break; }
 }
 inner += '<table class="sched-table"><thead><tr><th>Дата</th><th>Сумма</th><th>Статус</th></tr></thead><tbody>';
 row.client.schedule.forEach(function(p, i) {
-const paid = Number(p.paidSum) || 0;
-const sum = Number(p.sum) || 0;
+const paid = Number(p.paidSum) || 0, sum = Number(p.sum) || 0;
 const pd = new Date(p.date); const dl = new Date(pd); dl.setDate(dl.getDate() + 3);
 let st, cls;
 if (paid >= sum && sum > 0) { st = '✓ оплачен ' + fmt(paid); cls = 'st-paid'; }
 else if (paid > 0) { st = '◐ частично ' + fmt(paid); cls = 'st-part'; }
 else if (today > dl) { st = 'просрочен'; cls = 'st-late'; }
 else { st = 'ожидает'; cls = 'st-wait'; }
-const isNext = (i === nextIdx);
-inner += '<tr class="' + (isNext ? 'sched-next' : '') + '"><td>' + fmtDate(p.date) + (isNext ? '<span class="next-chip">следующий</span>' : '') + '</td><td>' + fmt(sum) + '</td><td class="' + cls + '">' + st + '</td></tr>';
+inner += '<tr class="' + (i === nextIdx ? 'sched-next' : '') + '"><td>' + fmtDate(p.date) + (i === nextIdx ? '<span class="next-chip">следующий</span>' : '') + '</td><td>' + fmt(sum) + '</td><td class="' + cls + '">' + st + '</td></tr>';
 });
 inner += '</tbody></table>';
 } else {
 inner += '<div class="empty-note">График недоступен (старая сделка без привязки клиента)</div>';
 }
-detail.innerHTML = '<td colspan="6">' + inner + '</td>';
+detail.innerHTML = '<td colspan="7">' + inner + '</td>';
 tbody.appendChild(detail);
 });
+}
+
+function renderForecast() {
+const inv = currentInvestor;
+const today = new Date(); today.setHours(0, 0, 0, 0);
+const events = [];
+(inv.deals || []).forEach(function(d) {
+if (!d.active) return;
+const ds = new Date(d.date); const tm = parseInt(d.term) || 0;
+const mi = Number(d.monthlyIncome) || 0;
+for (let mNum = 1; mNum <= tm; mNum++) {
+const ad = new Date(ds); ad.setMonth(ds.getMonth() + mNum);
+if (ad >= today) events.push({ date: ad, amount: mi, who: (d.clientName || 'клиент') + ' — ' + (d.productName || '') });
+}
+});
+events.sort(function(a, b) { return a.date - b.date; });
+const chipsEl = document.getElementById('forecastChips');
+const bodyEl = document.getElementById('forecastBody');
+if (events.length === 0) { chipsEl.innerHTML = ''; bodyEl.innerHTML = '<div class="empty-note">Активных сделок нет — прогноз пуст</div>'; return; }
+const months = [];
+for (let i = 0; i < 3; i++) {
+const md = new Date(today.getFullYear(), today.getMonth() + i, 1);
+const me = new Date(today.getFullYear(), today.getMonth() + i + 1, 0, 23, 59, 59);
+const sum = events.filter(function(e) { return e.date >= md && e.date <= me; }).reduce(function(s, e) { return s + e.amount; }, 0);
+months.push({ label: md.toLocaleDateString('ru-RU', { month: 'long' }), sum: sum });
+}
+chipsEl.innerHTML = months.map(function(mo) {
+return '<div class="f-chip"><span>' + mo.label + '</span>' + fmt(mo.sum) + '</div>';
+}).join('');
+bodyEl.innerHTML = events.slice(0, 8).map(function(e) {
+return '<div class="fc-row"><span class="fc-date">' + fmtDate(e.date.toISOString().split('T')[0]) + '</span><span class="fc-who">' + e.who + '</span><span class="fc-sum">+' + fmt(e.amount) + '</span></div>';
+}).join('') + (events.length > 8 ? '<div class="empty-note">и ещё ' + (events.length - 8) + ' начислений позже</div>' : '');
 }
 
 function buildEvents(inv) {
@@ -408,15 +585,10 @@ const a = Number(t.amount) || 0;
 if (t.type === 'take_for_product') {
 const deal = (inv.deals || []).find(function(d) { return d.productName === t.name && d.date === t.date; }) || (inv.deals || []).find(function(d) { return d.productName === t.name; });
 events.push({ date: t.date, type: 'take_for_product', label: 'Взято на товар', sub: (deal && deal.clientName ? deal.clientName + ' — ' : '') + t.name, amount: a, sign: -1, seq: 0 });
-} else if (t.type === 'deposit') {
-events.push({ date: t.date, type: 'deposit', label: 'Взнос', sub: '', amount: a, sign: 1, seq: 0 });
-} else if (t.type === 'topup') {
-events.push({ date: t.date, type: 'topup', label: 'Пополнение', sub: '', amount: a, sign: 1, seq: 0 });
-} else if (t.type === 'income') {
-events.push({ date: t.date, type: 'income', label: 'Начислен доход', sub: t.name || '', amount: a, sign: 1, seq: 0 });
-}
+} else if (t.type === 'deposit') events.push({ date: t.date, type: 'deposit', label: 'Взнос', sub: '', amount: a, sign: 1, seq: 0 });
+else if (t.type === 'topup') events.push({ date: t.date, type: 'topup', label: 'Пополнение', sub: '', amount: a, sign: 1, seq: 0 });
+else if (t.type === 'income') events.push({ date: t.date, type: 'income', label: 'Начислен доход', sub: t.name || '', amount: a, sign: 1, seq: 0 });
 });
-/* Каждый платёж клиента — отдельное событие, даже если два в один день */
 currentAllocation.rows.forEach(function(row) {
 const clientName = row.deal.clientName || (row.client ? row.client.name : 'клиент');
 row.payments.forEach(function(p) {
@@ -439,22 +611,44 @@ const search = document.getElementById('searchFilter').value.toLowerCase();
 let events = buildEvents(currentInvestor);
 if (typeFilter !== 'all') events = events.filter(function(e) { return e.type === typeFilter; });
 if (search) events = events.filter(function(e) { return (e.label + ' ' + e.sub).toLowerCase().includes(search); });
-if (events.length === 0) {
-timeline.innerHTML = '<p class="empty-note">Нет операций по фильтру</p>';
-return;
-}
+if (events.length === 0) { timeline.innerHTML = '<p class="empty-note">Нет операций по фильтру</p>'; return; }
 events.forEach(function(e) {
 const item = document.createElement('div');
 item.className = 'timeline-item';
-const amountClass = e.sign > 0 ? 'positive' : 'negative';
-const prefix = e.sign > 0 ? '+' : '−';
-item.innerHTML =
-'<div class="timeline-type">' + e.label + '</div>' +
+item.innerHTML = '<div class="timeline-type">' + e.label + '</div>' +
 (e.sub ? '<div class="timeline-sub">' + e.sub + '</div>' : '') +
-'<div class="timeline-amount ' + amountClass + '">' + prefix + fmt(e.amount) + '</div>' +
+'<div class="timeline-amount ' + (e.sign > 0 ? 'positive' : 'negative') + '">' + (e.sign > 0 ? '+' : '−') + fmt(e.amount) + '</div>' +
 '<div class="timeline-date">' + fmtDate(e.date) + '</div>';
 timeline.appendChild(item);
 });
+}
+
+function downloadStatement() {
+const inv = currentInvestor;
+const m = computeMetrics(inv, currentAllocation);
+let csv = '\uFEFF';
+csv += 'YuNur — выписка инвестора\r\n';
+csv += 'Имя;' + inv.name + '\r\n';
+csv += 'Код;' + (inv.invCode || '') + '\r\n';
+csv += 'Tier;' + (inv.tier || 'base') + '\r\n';
+csv += 'Дата выписки;' + new Date().toLocaleDateString('ru-RU') + '\r\n\r\n';
+csv += 'ОПЕРАЦИИ\r\nДата;Тип;Название;Сумма\r\n';
+(inv.transactions || []).slice().sort(function(a, b) { return new Date(b.date) - new Date(a.date); }).forEach(function(t) {
+const label = t.type === 'deposit' ? 'взнос' : t.type === 'topup' ? 'пополнение' : t.type === 'take_for_product' ? 'взято на товар' : 'доход';
+csv += fmtDate(t.date) + ';' + label + ';' + (t.name || '') + ';' + t.amount + '\r\n';
+});
+csv += '\r\nСДЕЛКИ\r\nДата;Клиент;Товар;Сумма;Возвращено;Статус\r\n';
+currentAllocation.rows.forEach(function(r) {
+const amount = Number(r.deal.amount) || 0;
+const status = amount > 0 && r.returned >= amount ? 'возвращено' : r.returned > 0 ? 'частично' : 'в обороте';
+csv += fmtDate(r.deal.date) + ';' + (r.deal.clientName || (r.client ? r.client.name : '')) + ';' + (r.deal.productName || '') + ';' + amount + ';' + Math.round(r.returned) + ';' + status + '\r\n';
+});
+csv += '\r\nИТОГИ\r\nНа счёте;' + Math.round(m.onAccount) + '\r\nВ обороте;' + Math.round(m.inTurnover) + '\r\nВозвращено;' + Math.round(m.returned) + '\r\nНачислено дохода;' + Math.round(m.accrued) + '\r\n';
+const a = document.createElement('a');
+a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+a.download = 'YuNur_statement_' + (inv.invCode || 'investor') + '.csv';
+a.click();
+URL.revokeObjectURL(a.href);
 }
 
 function logout() {
